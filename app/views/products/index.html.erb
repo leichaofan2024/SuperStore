@@ -1,0 +1,19 @@
+<div class="col-md-12 col-xs-12">
+  <table>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr class="col-md-3 col-xs-6">
+          <%= link_to product_path(product) do %>
+            <td>
+              <% if product.image.present? %>
+                <%= image_tag(product.image.thumb.url, class: "thumbnail")%>
+              <% else %>
+                <%= image_tag("", class: "thumbnail") %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

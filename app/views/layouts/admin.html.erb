@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="">
   <head>
     <title>SuperStore后台</title>
     <%= csrf_meta_tags %>
@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="min-height:100%">
+  <body style="">
 
       <%= render "common/navbar" %>
 
@@ -21,7 +21,6 @@
         <%= yield %>
       </div>
     </div>
-
     <%= render "common/footer" %>
   </body>
 </html>
