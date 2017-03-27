@@ -1,7 +1,13 @@
-<%= simple_form_for [:admin, @product] do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :price %>
-  <%= f.input :quantity %>
-  <%= f.submit "Submit", data:{ disable_with: "Submitting..."} %>
-<% end %>
+<div class="col-md-8 col-xs-12">
+  <div class="text-center">
+    <h3>商品编辑</h3>
+    <hr>
+  </div>
+  <%= simple_form_for [:admin, @product] do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :quantity %>
+    <%= f.submit "Submit", data:{ disable_with: "Submitting..."} %>
+  <% end %>
+</div>
