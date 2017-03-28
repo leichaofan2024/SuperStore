@@ -7,7 +7,7 @@
         <% if product.image.present? %>
           <%= image_tag(product.image.thumb.url, class: "thumbnail product-picture")%>
         <% else %>
-          <%= image_tag("", class: "thumbnail product-picture") %>
+          <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail product-picture") %>
         <% end %>
 
       <% end %>
