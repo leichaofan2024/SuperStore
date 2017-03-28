@@ -1,0 +1,10 @@
+<div class="col-md-6 col-xs-12">
+  <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
+</div>
+<div class="col-md-6 col-xs-12">
+  <h3><%= @product.title %></h3>
+  <p style="height:100px;"><%= @product.description %></p>
+  <div class="pull-right">
+    <%= link_to("加入购物车", "#", class: "btn btn-danger btn-lg ") %>
+  </div>
+</div>

@@ -6,6 +6,9 @@
       <a class= "navbar-brand" href="/">SuperStrore</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><%= link_to("商品首页", products_path) %></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user.present? %>
           <li>
