@@ -17,9 +17,9 @@
         <%= link_to product_path(cartitem.product) do %>
         <td>
           <% if cartitem.product.image.present? %>
-            <%= image_tag(cartitem.product.image.thumb.url, class: "thumbnail" ) %>
+            <%= image_tag(cartitem.product.image.small.url, class: "thumbnail" ) %>
           <% else %>
-            <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"200", height:"200", class: "thumbnail" ) %>
+            <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"100", height:"100", class: "thumbnail" ) %>
           <% end %>
         </td>
         <td><%= cartitem.product.title %></td>
@@ -34,6 +34,10 @@
 <br>
 <div class="clearfix">
   <span class="pull-right">
-    总计： <span><%= render_cart_total_price(current_cart) %></span> RMB 
+    总计： <span><%= render_cart_total_price(current_cart) %></span> RMB
   </span>
+</div>
+<hr>
+<div class="pull-right">
+  <%= link_to("马上结账", "#", class: "btn btn-danger btn-lg" ) %>
 </div>
