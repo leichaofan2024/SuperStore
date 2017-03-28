@@ -1,5 +1,9 @@
 <div class="col-md-6 col-xs-12">
-  <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
+  <% if @product.image.present? %>
+    <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
+  <% else %>
+    <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", class: "thumbnail") %>
+  <% end %>
 </div>
 <div class="col-md-6 col-xs-12">
   <h3><%= @product.title %></h3>

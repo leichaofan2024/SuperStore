@@ -1,0 +1,33 @@
+<h3>购物车明细</h3>
+<hr>
+<table class="table table-bordered ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th colspan="2">商品详情</th>
+      <th>单价</th>
+      <th>数量</th>
+      <th>小记</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_cart.cartitems.each do |cartitem| %>
+      <tr>
+        <td><%= cartitem.product.id%></td>
+        <%= link_to product_path(cartitem.product) do %>
+        <td>
+          <% if cartitem.product.image.present? %>
+            <%= image_tag(cartitem.product.image.thumb.url, class: "thumbnail" ) %>
+          <% else %>
+            <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"200", height:"200", class: "thumbnail" ) %>
+          <% end %>
+        </td>
+        <td><%= cartitem.product.title %></td>
+        <% end %>
+        <td><%= cartitem.product.price %></td>
+        <td><%= cartitem.quantity %></td>
+        <td><%= cartitem.quantity * cartitem.product.price %> ¥</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
