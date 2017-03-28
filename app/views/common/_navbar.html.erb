@@ -10,6 +10,7 @@
         <li class="active"><%= link_to("商品首页", products_path) %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to(content_tag(:i, "我的收藏", class: "fa fa-heart fa-md"), products_path(:favorite => "yes"))%> </li>
         <% if !current_user.present? %>
           <li>
             <%= link_to("注册", new_user_registration_path) %>
