@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products
   end
+  resources :cartitems 
   resources :products do
     member do
       post :add_to_cart
@@ -12,6 +13,6 @@ Rails.application.routes.draw do
       post :quit_favorite
     end
   end
-  resource :cart 
+  resource :cart
 
 end
