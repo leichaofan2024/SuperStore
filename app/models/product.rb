@@ -3,6 +3,12 @@ class Product < ApplicationRecord
   has_many :users, through: :favorites , source: :user
   mount_uploader :image, ImageUploader
 
+
+  def is_favorited?(user)
+    self.users.include?(user)
+  end 
+
+
   def add_to_favorite!(user)
     self.users << user
     self.save
