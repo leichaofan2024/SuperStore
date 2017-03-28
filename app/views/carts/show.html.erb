@@ -13,7 +13,7 @@
   <tbody>
     <% current_cart.cartitems.each do |cartitem| %>
       <tr>
-        <td><%= cartitem.product.id%></td>
+        <td><%= cartitem.product.id %></td>
         <%= link_to product_path(cartitem.product) do %>
         <td>
           <% if cartitem.product.image.present? %>
@@ -31,3 +31,9 @@
     <% end %>
   </tbody>
 </table>
+<br>
+<div class="clearfix">
+  <span class="pull-right">
+    总计： <span><%= render_cart_total_price(current_cart) %></span> RMB 
+  </span>
+</div>
