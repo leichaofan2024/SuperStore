@@ -1,12 +1,14 @@
 class Product < ApplicationRecord
   has_many :favorites
   has_many :users, through: :favorites , source: :user
+  has_many :cartitems
+  
   mount_uploader :image, ImageUploader
 
 
   def is_favorited?(user)
     self.users.include?(user)
-  end 
+  end
 
 
   def add_to_favorite!(user)
