@@ -7,15 +7,15 @@
         <% if product.image.present? %>
           <%= image_tag(product.image.thumb.url, class: "thumbnail product-picture")%>
         <% else %>
-          <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 210 , height: 210 , class: "thumbnail product-picture") %>
+          <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 205 , height: 205 , class: "thumbnail product-picture") %>
         <% end %>
 
       <% end %>
       <div class="">
         <% if !product.is_favorited?(current_user) %>
-          <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart") %>
+          <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart fa-lg") %>
         <% else %>
-          <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart", style: "color:red;") %>
+          <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart fa-lg", style: "color:red;") %>
         <% end %>
 
       <%= product.title %> ¥ <%= product.price %>
