@@ -1,6 +1,11 @@
 class CartitemsController < ApplicationController
 
-
+  def update
+    @cart = current_cart
+    @cartitem = @cart.cartitems.find_by(product_id: params[:id])
+    @cartitem.update(cartitem_params)
+    redirect_to :back
+  end
   def destroy
     @cart = current_cart
     @cartitem = @cart.cartitems.find_by(product_id: params[:id])
@@ -10,4 +15,9 @@ class CartitemsController < ApplicationController
   end
 
 
+  private
+
+  def cartitem_params
+    params.require(:cartitem).permit(:quantity)
+  end 
 end
