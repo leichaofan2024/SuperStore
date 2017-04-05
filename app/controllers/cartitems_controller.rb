@@ -3,8 +3,13 @@ class CartitemsController < ApplicationController
   def update
     @cart = current_cart
     @cartitem = @cart.cartitems.find_by(product_id: params[:id])
-    @cartitem.update(cartitem_params)
-    redirect_to :back
+    if @cartitem.product.quantity >= cartitem_params[:quantity].to_i
+      @cartitem.update(cartitem_params)
+      flash[:notice] = "成功变更数量 "
+    else
+      flash[:warning] = "数量不足以加入购物车"
+    end
+    redirect_to carts_path
   end
   def destroy
     @cart = current_cart
@@ -19,5 +24,5 @@ class CartitemsController < ApplicationController
 
   def cartitem_params
     params.require(:cartitem).permit(:quantity)
-  end 
+  end
 end
