@@ -31,8 +31,8 @@
         <td><%= cartitem.product.price %></td>
         <td>
           <%= simple_form_for cartitem,url: cartitem_path(cartitem.product_id) do |f| %>
-            <%= f.select :quantity,[1,2,3,4,5] %>
-            <%= f.submit "更新", class:"btn btn-default btn-xs" %>
+            <%= f.select :quantity,1..cartitem.product.quantity %>
+            <%= f.submit "更新", data: {disable_with: "Submitting..."},class:"btn btn-default btn-xs" %>
           <% end %>
         </td>
         <td>
