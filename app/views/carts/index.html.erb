@@ -44,7 +44,7 @@
               0 ¥
             <% end %>
           </td>
-          <td><%= link_to("", cartitem_path(cartitem.product_id), method: :delete, data:{confirm: "Are you sure?"}, class: "fa fa-trash fa-lg") %></td>
+          <td><%= link_to("", cartitem_path(cartitem), method: :delete, data:{confirm: "Are you sure?"}, class: "fa fa-trash fa-lg") %></td>
         </tr>
       <% else %>
         <tr style="background-color:gray">
