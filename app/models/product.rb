@@ -1,8 +1,10 @@
 class Product < ApplicationRecord
+  validates :price, presence: true
+  validates :title, presence: true
   has_many :favorites
   has_many :users, through: :favorites , source: :user
   has_many :cartitems
-  
+
   mount_uploader :image, ImageUploader
 
 

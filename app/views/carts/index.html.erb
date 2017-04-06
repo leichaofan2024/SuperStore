@@ -7,7 +7,8 @@
   <thead>
     <tr>
       <th>#</th>
-      <th colspan="2">商品详情</th>
+      <th>商品详情</th>
+      <th>宝贝名称</th>
       <th>单价</th>
       <th>数量</th>
       <th>小记</th>
@@ -16,41 +17,55 @@
   </thead>
   <tbody>
     <% current_cart.cartitems.each do |cartitem| %>
-      <tr>
-        <td><%= cartitem.product.id %></td>
-        <td>
-          <%= link_to product_path(cartitem.product) do %>
-           <% if cartitem.product.image.present? %>
-              <%= image_tag(cartitem.product.image.small.url, class: "thumbnail" ) %>
-            <% else %>
-              <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"100", height:"100", class: "thumbnail" ) %>
+      <% if cartitem.product.present? %>
+        <tr>
+          <td><%= cartitem.product.id %></td>
+          <td>
+            <%= link_to product_path(cartitem.product) do %>
+             <% if cartitem.product.image.present? %>
+                <%= image_tag(cartitem.product.image.small.url, class: "thumbnail" ) %>
+              <% else %>
+                <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"100", height:"100", class: "thumbnail" ) %>
+              <% end %>
             <% end %>
-          <% end %>
-        </td>
-        <td><%= cartitem.product.title %></td>
-        <td><%= cartitem.product.price %></td>
-        <td>
-          <%= simple_form_for cartitem,url: cartitem_path(cartitem.product_id) do |f| %>
-            <%= f.select :quantity,1..cartitem.product.quantity %>
-            <%= f.submit "更新", data: {disable_with: "Submitting..."},class:"btn btn-default btn-xs" %>
-          <% end %>
-        </td>
-        <td>
-          <% if cartitem.product.price.present? %>
-            <%= cartitem.quantity * cartitem.product.price %> ¥
-          <% else %>
-            0 ¥
-          <% end %>
-       </td>
-        <td><%= link_to("", cartitem_path(cartitem.product_id), method: :delete, data:{confirm: "Are you sure?"}, class: "fa fa-trash fa-lg") %></td>
-      </tr>
+          </td>
+          <td><%= cartitem.product.title %></td>
+          <td><%= cartitem.product.price %></td>
+          <td>
+            <%= simple_form_for cartitem,url: cartitem_path(cartitem.product_id) do |f| %>
+              <%= f.select :quantity,1..cartitem.product.quantity %>
+              <%= f.submit "更新", data: {disable_with: "Submitting..."},class:"btn btn-default btn-xs" %>
+            <% end %>
+          </td>
+          <td>
+            <% if cartitem.product.price.present? %>
+              <%= cartitem.quantity * cartitem.product.price %> ¥
+            <% else %>
+              0 ¥
+            <% end %>
+          </td>
+          <td><%= link_to("", cartitem_path(cartitem.product_id), method: :delete, data:{confirm: "Are you sure?"}, class: "fa fa-trash fa-lg") %></td>
+        </tr>
+      <% else %>
+        <tr style="background-color:gray">
+          <td><%= cartitem.product_id %></td>
+          <td><%= image_tag("https://ww2.sinaimg.cn/large/006tNc79gy1fe6gtfxntqj30ci09et97.jpg", width:"100", height:"100", class: "thumbnail" )%> </td>
+          <td><%= cartitem.title %></td>
+          <td colspan="3">此产品已过期！</td>
+          <td>
+            <%= link_to cartitem_path(cartitem),method: :delete，data:{} do %>
+              <i class="fa fa-trash fa-lg"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 <br>
 <div class="clearfix">
   <span class="pull-right">
-    总计： <span><%= render_cart_total_price(current_cart) %></span> RMB
+    <span>总计： <%= render_cart_total_price(current_cart) %> RMB</span>
   </span>
 </div>
 <hr>
