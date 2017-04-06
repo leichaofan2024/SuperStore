@@ -4,7 +4,7 @@ module OrdersHelper
     if order.is_paid?
       "(已付款)"
     else
-      "(为付款)"
+      "(未付款)"
     end
-  end 
+  end
 end
