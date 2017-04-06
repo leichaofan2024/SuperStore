@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
         product_list.quantity = cartitem.quantity
         product_list.save
       end
+      current_cart.clean!
       redirect_to order_path(@order.token)
     else
       render "carts/checkout"
@@ -37,7 +38,7 @@ class OrdersController < ApplicationController
     @order.pay!
 
     redirect_to order_path(@order.token), notice: "使用微信完成付款"
-  end       
+  end
 
   private
 
