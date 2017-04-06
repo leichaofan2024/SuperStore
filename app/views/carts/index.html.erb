@@ -53,7 +53,7 @@
           <td><%= cartitem.title %></td>
           <td colspan="3">此产品已过期！</td>
           <td>
-            <%= link_to cartitem_path(cartitem),method: :delete，data:{} do %>
+            <%= link_to cartitem_path(cartitem),method: :delete do %>
               <i class="fa fa-trash fa-lg"></i>
             <% end %>
           </td>
