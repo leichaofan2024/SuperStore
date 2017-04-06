@@ -13,9 +13,10 @@ Rails.application.routes.draw do
       post :quit_favorite
     end
   end
-  resources :carts do 
+  resources :carts do
     collection do
       delete :clean
+      post :checkout
     end
   end
 end
