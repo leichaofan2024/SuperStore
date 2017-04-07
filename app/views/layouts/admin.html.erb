@@ -14,9 +14,11 @@
 
     <div class="container-fluid layout-admin">
       <%= render "common/flashes"%>
-      <div class="col-md-2 col-xs-4 text-center">
-        <%= link_to("后台列表", admin_products_path, class: "btn btn-primary sidebar") %><br>
-        <%= link_to("订单列表", admin_orders_path, class: "btn btn-primary sidebar") %>
+      <div class="col-md-2 col-xs-4">
+        <ul class="nav nav-pills nav-stacked">
+          <li><%= link_to("后台列表", admin_products_path, class: "btn btn-primary sidebar") %> </li>
+          <li><%= link_to("订单列表", admin_orders_path, class: "btn btn-primary sidebar") %></li>
+        </ul>
       </div>
       <div class="col-md-10">
         <%= yield %>
