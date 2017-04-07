@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   has_many :favorites
   has_many :users, through: :favorites , source: :user
   has_many :cartitems
-
+  belongs_to :category 
   mount_uploader :image, ImageUploader
 
 
