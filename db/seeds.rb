@@ -8,6 +8,6 @@
 
 
 puts "开始创建管理员..."
- User.new(email: "leichaofan2024@gmail.com", password: "123456", password_confirmation: "123456", is_admin: true)
+ User.create(email: "leichaofan2024@gmail.com", password: "123456", password_confirmation: "123456", is_admin: true)
 
 puts "管理员生成成功！"
