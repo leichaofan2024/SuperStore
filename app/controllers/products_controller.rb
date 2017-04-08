@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index, :show]
+  before_action :validates_search_key, only:[:search]
   def index
     @products = Product.all
     if params[:favorite] == "yes"
@@ -7,7 +8,7 @@ class ProductsController < ApplicationController
     end
     if params[:category].present?
       @products = Product.all.where(category_id: params[:category])
-    end 
+    end
 
   end
 
@@ -37,4 +38,11 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: " 取消收藏！"
   end
 
+  def search
+    @products = Product.ransack({:title_or_description_or_price_cont => @q}).result(distinct: true)
+  end
+  protected
+  def validates_search_key
+    @q = params[:query_string].gsub(/\\|\'|\/|\?/, "") if params[:query_string].present?
+  end
 end

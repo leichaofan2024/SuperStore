@@ -9,6 +9,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><%= link_to("商品首页", products_path) %></li>
       </ul>
+      <%= render "products/search_bar"%>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to(content_tag(:i, "我的收藏", class: "fa fa-heart fa-md"), products_path(:favorite => "yes"))%> </li>
         <li>

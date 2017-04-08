@@ -47,3 +47,25 @@
 
    }
  }
+ .search-frame{
+   position:relative;
+   margin-left:30px;
+   margin-top:10px;
+   .search-input{
+     float:left;
+   }
+   .form-control{
+     border-radius: 20px;
+     float:left;
+
+   }
+   button {
+     border-style: none;
+     background-color: white;
+     float:left;
+     color:gray;
+     position:relative;
+     right:30px;
+     top:8px;
+   }
+ }
