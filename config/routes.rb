@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   end
   resources :cartitems
   resources :products do
+    resources :reviews
     collection do
       get :search
-    end  
+    end
     member do
       post :add_to_cart
       post :add_to_favorite
