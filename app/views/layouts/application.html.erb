@@ -11,7 +11,13 @@
   <body style="height:100%;">
 
       <%= render "common/navbar" %>
+
     <div class="container-fluid layout-application">
+      <div class="">
+        <%  Category.all.each do |category| %>
+          <span><%= link_to(category.name, products_path(category: category.id), class: "btn btn-secondary") %> </span>
+        <% end %>
+      </div>
       <%= render "common/flashes"%>
       <%= yield %>
     </div>

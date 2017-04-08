@@ -5,6 +5,9 @@ class ProductsController < ApplicationController
     if params[:favorite] == "yes"
       @products = current_user.products
     end
+    if params[:category].present?
+      @products = Product.all.where(category_id: params[:category])
+    end 
 
   end
 

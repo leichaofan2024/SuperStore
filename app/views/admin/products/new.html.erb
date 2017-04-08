@@ -5,16 +5,20 @@
     </div>
     <%= simple_form_for [:admin,@product] do |f| %>
       <div class="group">
-        <%= f.input :title %>
+        <%= f.input :title, label: "商品名称" %>
       </div>
       <div class="group">
-        <%= f.input :description %>
+        <%= f.input :description, label: "商品描述" %>
       </div>
       <div class="group">
-        <%= f.input :price %>
+        <%= f.input :price, :label => "商品价格" %>
       </div>
       <div class="group">
-        <%= f.input :quantity %>
+        <%= f.input :quantity, label: "库存" %>
+      </div>
+      <div class="group">
+        <%= f.select(:category_id, @categories)%>
+        <!-- <%= select_tag(:category_id, options_for_select(Category.all.map{|c| [c.id,c.name]}), :prompt => "类别") %> -->
       </div>
       <div class="group">
         <%= f.input :image, as: :file %>
