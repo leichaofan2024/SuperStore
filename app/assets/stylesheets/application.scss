@@ -32,3 +32,18 @@
    margin-bottom:-80px;
    min-height: 100%;
  }
+ .category-bar{
+   height:50px;
+   line-height:50px;
+   margin:0 20px 20px;
+   padding-left:50px;
+   background-color:rgb(158,158,158);
+   span a{
+     font-size: 20px;
+     color:black;
+     height:40px;
+     line-height:40px;
+     vertical-align: top;
+
+   }
+ }
