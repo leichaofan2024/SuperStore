@@ -4,14 +4,17 @@
     <hr>
   </div>
   <%= simple_form_for [:admin, @product] do |f| %>
-    <%= f.input :title %>
-    <%= f.input :description %>
-    <%= f.input :price %>
-    <%= f.input :quantity %>
+    <%= f.input :title,:label => "茶叶名称" %>
+    <%= f.input :description, :label => "详细描述" %>
+    <%= f.input :price, :label => "单价" %>
+    <%= f.input :quantity, :label => "库存" %>
+    <%= f.label "茶叶品种"%><br>
+    <%= f.select(:category_id,@categories) %><br><br>
     <% if @product.image.present? %>
+      <%= f.label "当前图片" %><br>
       <%= image_tag(@product.image.thumb.url) %>
     <% end %>
-    <%= f.input :image, as: :file %>
-    <%= f.submit "Submit", data:{ disable_with: "Submitting..."} %>
+    <%= f.input :image, as: :file, :label => "上传图片"%>
+    <%= f.submit "确定", data:{ disable_with: "Submitting..."} %>
   <% end %>
 </div>

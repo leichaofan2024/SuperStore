@@ -17,6 +17,7 @@
         <%= f.input :quantity, label: "库存" %>
       </div>
       <div class="group">
+        <%= f.label "茶叶品种"%><br>
         <%= f.select(:category_id, @categories)%>
         <!-- <%= select_tag(:category_id, options_for_select(Category.all.map{|c| [c.id,c.name]}), :prompt => "类别") %> -->
       </div>
