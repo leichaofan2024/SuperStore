@@ -7,7 +7,7 @@
 </div>
 <div class="col-md-6 col-xs-12">
   <h3><%= @product.title %></h3>
-  <p style="height:100px;"><%= @product.description %></p>
+  <p style="height:100px;"><%= simple_format(@product.description) %></p>
   <div class="pull-right">
     <% if @product.quantity.present? && @product.quantity > 0 %>
       <%= link_to("加入购物车",add_to_cart_product_path(@product),method: :post, class: "btn btn-danger btn-lg ") %>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
           <td>
-            <%= review.content %>
+            <%= simple_format(review.content) %>
             <% if current_user.present? && review.user.email == current_user.email%>
              <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
             <% end %>
