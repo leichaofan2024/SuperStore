@@ -5,7 +5,7 @@
       <% if @user.image.present? %>
         <%= image_tag(@user.image.thumb.url, class:"thumbnail") %>
       <% else %>
-        <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 200,height:200,class:"thumbnail")%>
+        <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg", width: 200,height:200,class:"thumbnail")%>
       <% end %>
       <%= f.input :image, as: :file,label: "更改头像"%>
       <%= f.input :nickname, label: "昵称" %>
