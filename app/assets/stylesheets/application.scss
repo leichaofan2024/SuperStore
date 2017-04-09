@@ -22,13 +22,11 @@
    position: relative;
    padding-bottom:80px;
    margin-bottom:-80px;
-   padding-top: 70px;
    min-height: 100%;
  }
  .layout-application{
    position:relative;
    padding-bottom:80px;
-   padding-top:70px;
    margin-bottom:-80px;
    min-height: 100%;
  }
@@ -54,43 +52,17 @@
      background:rgb(93,64,55);
    }
  }
- .category-bar{
-   height:50px;
-   line-height:50px;
-   margin:0 20px 20px;
-   padding-left:50px;
-   background-color:rgb(158,158,158);
-   span a{
-     font-size: 20px;
-     color:black;
-     height:40px;
-     line-height:40px;
-     vertical-align: top;
+// 页脚样式
+  footer {
+     position:absolute;
+     height:80px;
+     width:100%;
+     padding-top:20px;
+  }
 
-   }
- }
- .search-frame{
-   position:relative;
-   margin-left:30px;
-   margin-top:10px;
-   .search-input{
-     float:left;
-   }
-   .form-control{
-     border-radius: 20px;
-     float:left;
 
-   }
-   button {
-     border-style: none;
-     background-color: white;
-     float:left;
-     color:gray;
-     position:relative;
-     right:30px;
-     top:8px;
-   }
- }
+
+ // 头像
    .avatar {
      position:relative;
      bottom:5px;
@@ -102,5 +74,4 @@
      margin-left:10px;
      position:relative;
      top:10px;
-    //  display:inline;
    }

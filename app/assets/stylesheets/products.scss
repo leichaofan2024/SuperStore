@@ -8,3 +8,125 @@
   box-shadow:6px 6px 8px #888888;
 
 }
+// 顶部的导航
+  .header_placeholder {
+     display: none;
+     height:80px;
+}
+.header {
+  width: 100%;
+  // position: fixed;
+  top:0;
+  left:0;
+  height:80px;
+  z-index:100;
+  background:#fff;
+  box-shadow: rgba(0,0,0,.1) 0 1px 5px;
+}
+.header-content{
+  margin-left:auto !important;
+  margin-right:auto !important;
+  margin-top:30px;
+  padding-bottom:20px;
+  position:relative;
+  width:90%;
+}
+.logo{
+  font-size: 36px;
+  width: 30%;
+  height: 60px;
+  float:left;
+  display:inline;
+  a {
+    color:rgb(93,64,55);
+  }
+  a:hover {
+    color: green;
+    text-decoration:none;
+  }
+}
+
+// 搜索
+.search-bar{
+  width:40%;
+  float:left;
+
+}
+.search-frame{
+  position:relative;
+  width:80%;
+  margin-top:10px;
+  .search-input{
+    float:left;
+    width:80%;
+    display:inline;
+  }
+  .form-control{
+    border-radius: 20px;
+    border:2px solid rgb(93,64,55);
+  }
+  button {
+    position:relative;
+    border-style: none;
+    background-color: white;
+    float:left;
+    color:gray;
+    right:30px;
+    top:8px;
+    display:inline;
+  }
+}
+// 购物车
+.cart-bar {
+  width:30%;
+  margin-top:10px;
+  float:left;
+}
+.cart{
+  width:50%;
+  float:right;
+  height:40px;
+  cursor:pointer;
+  padding-top:8px;
+  border:1px solid rgb(245,245,245);
+  background: #DFDFDF;
+  font-size: 14px;
+  text-align:center;
+  a {
+    text-decoration:none;
+    color: rgb(93,64,55);
+  }
+  a:hover {
+    text-decoration:none;
+    color:green;
+  }
+  i {
+    margin-right:5px;
+  }
+  span {
+    background:rgb(93,64,55);
+    padding:1px 5px;
+    border-radius:50%;
+    color:white;
+  }
+}
+// 分类
+.category-bar{
+  height:50px;
+  line-height:50px;
+  width:100%;
+  margin-bottom: 20px;
+  padding-left:50px;
+  background-color:rgb(51,51,51);
+  span a{
+    font-size: 20px;
+    color:rgb(158,158,158);
+    height:40px;
+    line-height:40px;
+    vertical-align: top;
+
+  }
+  span a:hover{
+    color:green;
+  }
+}

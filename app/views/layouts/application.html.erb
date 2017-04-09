@@ -12,13 +12,8 @@
 
       <%= render "common/navbar" %>
 
-    <div class="container-fluid layout-application">
-      <div class="category-bar">
-        <span><%= link_to("全部商品", products_path, class:"btn btn-secondary")%></span>
-        <%  Category.all.each do |category| %>
-          <span><%= link_to(category.name, products_path(category: category.id), class: "btn btn-secondary") %> </span>
-        <% end %>
-      </div>
+    <div class=" layout-application">
+
       <%= render "common/flashes"%>
       <%= yield %>
     </div>
