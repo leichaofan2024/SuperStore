@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @review = Review.new 
+    @review = Review.new
   end
 
   def add_to_cart
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.ransack({:title_or_description_or_price_cont => @q}).result(distinct: true)
+    @products = Product.ransack({:title_or_description_cont => @q}).result(distinct: true)
   end
   protected
   def validates_search_key
