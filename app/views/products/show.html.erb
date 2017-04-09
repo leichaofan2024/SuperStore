@@ -23,7 +23,22 @@
     <tbody>
       <% @product.reviews.each do |review| %>
         <tr>
-          <td><%= review.user.email %> 说：</td>
+          <td>
+            <span>
+              <% if review.user.image.present? %>
+                <%= image_tag(review.user.image.xsmall.url,style:"border-radius:27px;")%>
+             <% else %>
+                <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:50,height:50, style:"border-radius:27px;")%>
+             <% end %>
+            </span>
+            <span>
+              <% if review.user.nickname.present? %>
+                 <b><%= review.user.nickname %></b>
+              <% else %>
+                 <b>小红帽</b>
+              <% end %>
+            </span> 说：
+          </td>
         </tr>
         <tr>
           <td>

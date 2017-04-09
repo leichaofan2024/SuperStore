@@ -29,8 +29,20 @@
           <li class="drodown">
              <a href="#" class="dropdown-toggle clearfix" data-toggle= "dropdown" style="height:50px;">
                <b class="caret navbar-right"></b>
-               <span class= "navbar-right clearfix"><%= current_user.nickname %></span>
-               <span class="navbar-right avatar clearfix"><%= image_tag(current_user.image.xxsmall.url,style:"border-radius:22px;")%></span>
+               <span class= "navbar-right clearfix">
+                 <% if current_user.nickname.present? %>
+                   <%= current_user.nickname %>
+                 <% else %>
+                   小红帽
+                 <% end %>
+               </span>
+               <span class="navbar-right avatar clearfix">
+                 <% if current_user.image.present? %>
+                   <%= image_tag(current_user.image.xxsmall.url,style:"border-radius:22px;")%>
+                 <% else %>
+                   <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:40,height:40, style:"border-radius:22px;")%>
+                 <% end %>
+               </span>
 
              </a>
              <ul class="dropdown-menu">
