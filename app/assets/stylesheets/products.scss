@@ -211,3 +211,99 @@
 .product-ending {
   padding:30px 0;
 }
+
+// show页面样式
+.show-frame{
+  width:90%;
+  margin:20px auto 20px;
+}
+.show-nav{
+  margin-left: 15px;
+  a:hover{
+    color:green;
+  }
+}
+.show-card{
+  background:rgb(250,246,246);
+  width:100%;
+  margin-bottom:20px;
+  padding-bottom:20px;
+  border:1px solid #ddd;
+}
+.show-picture {
+  margin-top:30px;
+}
+.show-service{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #666;
+  border-top: 1px dotted #dedede;
+  border-bottom: 1px dotted #dedede;
+  p.price{
+    span.rmb{
+      color: #d7282d;
+      margin-left: 20px;
+    }
+    span.price{
+      color: #d7282d;
+      font-size: 30px;
+    }
+  }
+  p.service{
+    span.service-detail{
+      margin-left: 20px;
+    }
+  }
+}
+
+.show-quantity{
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #666;
+  p.quantity{
+    span.quantity{
+      margin-left: 20px;
+    }
+  }
+  p.sizes{
+    span.sizes{
+      margin-left: 20px;
+    }
+  }
+  p.delivery{
+    span.delivery{
+      margin-left: 20px;
+    }
+  }
+}
+.show-action{
+  padding-top:30px;
+
+  a{
+    width:200px;
+    color:white;
+    weight:10;
+    border-radius: 20px;
+    background:rgba(215,40,45,1);
+  }
+  a:hover{
+    background: rgba(210,38,40 ,1);
+  }
+}
+.show-favorit{
+  margin-top: 20px;
+  margin-left:8px;
+  color:rgba(111,113,111 ,1);
+  a {
+    margin-left:20px;
+    font-size: 20px;
+    .show-heart1{
+      color:red;
+    }
+    .show-heart2{
+      color:rgb(93,64,55);
+    }
+  }
+}

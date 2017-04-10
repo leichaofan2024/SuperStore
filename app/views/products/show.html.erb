@@ -1,60 +1,91 @@
-<div class="col-md-6 col-xs-12">
-  <% if @product.image.present? %>
-    <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
-  <% else %>
-    <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", class: "thumbnail") %>
-  <% end %>
-</div>
-<div class="col-md-6 col-xs-12 clearfix">
-  <h3><%= @product.title %></h3>
-  <p style="height:100px;"><%= simple_format(@product.description) %></p>
-  <div class="pull-right">
-    <% if @product.quantity.present? && @product.quantity > 0 %>
-      <%= link_to("加入购物车",add_to_cart_product_path(@product),method: :post, class: "btn btn-danger btn-lg ") %>
-    <% else %>
-      已销售一空，无法购买
-    <% end %>
-  </div>
-</div>
-<div class="col-md-8 clearfix">
-  <h4>评论</h4>
-  <hr>
-  <table class="table table-striped table-bordered">
-    <tbody>
-      <% @product.reviews.each do |review| %>
-        <tr>
-          <td>
-            <span>
-              <% if review.user.image.present? %>
-                <%= image_tag(review.user.image.xsmall.url,style:"border-radius:27px;")%>
-             <% else %>
-                <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:50,height:50, style:"border-radius:27px;")%>
-             <% end %>
-            </span>
-            <span>
-              <% if review.user.nickname.present? %>
-                 <b><%= review.user.nickname %></b>
-              <% else %>
-                 <b>小红帽</b>
-              <% end %>
-            </span> 说：
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= simple_format(review.content) %>
-            <% if current_user.present? && review.user.email == current_user.email%>
-             <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
-            <% end %>
-          </td>
-        </tr>
+<div class="show-frame">
+
+    <p class="show-nav">
+      <%= link_to("首页", products_path, style:"text-decoration:none") %> >
+      <%= link_to(@product.category.name, products_path(:category => @product.category.id),style:"text-decoration:none")%> >
+      <%= @product.title %>
+    </p>
+
+  <div class="container show-card">
+    <div class="col-md-6 col-xs-12 show-picture">
+      <% if @product.image.present? %>
+        <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
+      <% else %>
+        <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", class: "thumbnail") %>
       <% end %>
-    </tbody>
-  </table>
-  <h4>我要评论:</h4>
-  <hr>
-  <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
-    <%= f.input :content %>
-    <%= f.submit "提交评论"%>
-  <% end %>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <h3><%= @product.title %></h3>
+      <div class="show-service">
+        <p class="price">售价 <span class="rmb">￥</span><span class="price"><%= @product.price %></span></p>
+        <p class="service">服务 <span class="service-detail">7天无忧退货 | 48小时快速退款 | 正品保证</span></p>
+      </div>
+      <div class="show-quantity">
+        <p class="quantity">库存 <span class="quantity"><%= @product.quantity %></span> </p>
+        <p class="delivery">运费 <span class="delivery">满￥99 包邮</span></p>
+      </div>
+      <!-- <p style="height:100px;"><%= simple_format(@product.description) %></p> -->
+
+      <div class="show-action">
+        <% if @product.quantity.present? && @product.quantity > 0 %>
+          <%= link_to("加入购物车",add_to_cart_product_path(@product),method: :post, class: "btn btn-lg") %>
+        <% else %>
+          <%= link_to("已售罄","#",class: "btn btn-lg", style:"background-color:gray;") %>
+        <% end %>
+      </div>
+      <div class="show-favorit">
+
+          收藏人气(<%= @product.users.count %>)
+          <% if !@product.is_favorited?(current_user) %>
+            <%= link_to("",add_to_favorite_product_path(@product),method: :post, class: "show-heart1 fa fa-heart ",style:"text-decoration:none;color:rgba(111,113,111 ,1);") %>
+          <% else %>
+            <%= link_to("", quit_favorite_product_path(@product),method: :post,  class: "show-heart2 fa fa-heart ",style:"text-decoration:none;color:red;") %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-8 clearfix">
+      <h4>评论</h4>
+      <hr>
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <% @product.reviews.each do |review| %>
+            <tr>
+              <td>
+                <span>
+                  <% if review.user.image.present? %>
+                    <%= image_tag(review.user.image.xsmall.url,style:"border-radius:27px;")%>
+                 <% else %>
+                    <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:50,height:50, style:"border-radius:27px;")%>
+                 <% end %>
+                </span>
+                <span>
+                  <% if review.user.nickname.present? %>
+                     <b><%= review.user.nickname %></b>
+                  <% else %>
+                     <b>小红帽</b>
+                  <% end %>
+                </span> 说：
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= simple_format(review.content) %>
+                <% if current_user.present? && review.user.email == current_user.email%>
+                 <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <h4>我要评论:</h4>
+      <hr>
+      <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
+        <%= f.input :content %>
+        <%= f.submit "提交评论"%>
+      <% end %>
+    </div>
 </div>
