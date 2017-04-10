@@ -19,34 +19,48 @@
 </div>
 
 <div class="category-bar">
-  <span><%= link_to("全部商品", products_path, class:"btn btn-secondary")%></span>
+  <span><%= link_to("全部商品", products_path, class:"btn btn-secondary active")%></span>
   <%  Category.all.each do |category| %>
     <span><%= link_to(category.name, products_path(category: category.id), class: "btn btn-secondary") %> </span>
   <% end %>
 </div>
 
-<div class="row">
+<div class="order-bar">
+  <span>商品排序:</span>
+  <span class="active"><%= link_to("最新", products_path(:order => "latest"))%></span>
+  <span><%= link_to("价格", products_path(:order => "price"))%></span>
+  <span><%= link_to("人气", products_path(:order => "hot"))%></span>
+</div>
+
+<div class="product-area clearfix">
   <% @products.each do |product| %>
-    <div class="col-md-3 col-xs-6 text-center" style="margin-bottom:20px">
-      <%= link_to product_path(product) do %>
+    <div class="col-md-3 col-xs-6 product-list">
+      <div class="product-block">
+        <div class="product-picture">
+          <%= link_to product_path(product) do %>
+            <% if product.image.present? %>
+              <%= image_tag(product.image.thumb.url)%>
+            <% else %>
+              <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 200 , height: 200 ) %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="product-word">
+          <div class="product-word1">
+            ¥ <%= product.price %>
+            <% if !product.is_favorited?(current_user) %>
+              <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart",style: "color:rgba(158,158,158 ,1)") %>
+            <% else %>
+              <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart", style: "color:rgb(93,64,55);") %>
+            <% end %>
+          </div>
+        <div class="product-word2">
+          <div class="product-title"><%= product.title %></div>
+          <div class="product-favorite"><%= product.users.count%></div>
+        </div>
 
-        <% if product.image.present? %>
-          <%= image_tag(product.image.thumb.url, class: "thumbnail product-picture")%>
-        <% else %>
-          <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 205 , height: 205 , class: "thumbnail product-picture") %>
-        <% end %>
-
-      <% end %>
-      <div class="">
-        <% if !product.is_favorited?(current_user) %>
-          <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart fa-lg") %>
-        <% else %>
-          <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart fa-lg", style: "color:red;") %>
-        <% end %>
-
-      <%= product.title %> ¥ <%= product.price %>
+        </div>
       </div>
     </div>
   <% end %>
-
 </div>

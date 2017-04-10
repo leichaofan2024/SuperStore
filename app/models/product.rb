@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   has_many :cartitems
   belongs_to :category
   has_many :reviews
-   
+
   mount_uploader :image, ImageUploader
 
 
@@ -25,5 +25,5 @@ class Product < ApplicationRecord
     self.save
   end
 
-
+  scope :recent, -> {order("created_at DESC")}
 end
