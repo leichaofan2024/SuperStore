@@ -53,10 +53,12 @@
    }
  }
 // 页脚样式
-  footer {
+  .page-footer {
      position:absolute;
+     margin:0 auto;
      height:80px;
      width:100%;
+     border-top: 1px solid rgb(93,64,55);
      padding-top:20px;
   }
 
