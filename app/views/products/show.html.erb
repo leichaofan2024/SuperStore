@@ -46,46 +46,129 @@
     </div>
   </div>
 
-    <div class="col-md-8 clearfix">
-      <h4>评论</h4>
-      <hr>
-      <table class="table table-striped table-bordered">
-        <tbody>
-          <% @product.reviews.each do |review| %>
-            <tr>
-              <td>
-                <span>
-                  <% if review.user.image.present? %>
-                    <%= image_tag(review.user.image.xsmall.url,style:"border-radius:27px;")%>
-                 <% else %>
-                    <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:50,height:50, style:"border-radius:27px;")%>
-                 <% end %>
-                </span>
-                <span>
-                  <% if review.user.nickname.present? %>
-                     <b><%= review.user.nickname %></b>
-                  <% else %>
-                     <b>小红帽</b>
-                  <% end %>
-                </span> 说：
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= simple_format(review.content) %>
-                <% if current_user.present? && review.user.email == current_user.email%>
-                 <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
+  <div class="col-md-8 col-xs-8">
+    <div class="review-card">
+
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#tab_default_1" >宝贝评价(<%= "#{@product.reviews.count}" %>) </a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#tab_default_2">宝贝详情 </a>
+          </li>
+
+        </ul>
+
+       <div class="tab-content">
+          <div class="tab-pane fade in active" id="tab_default_1">
+            <div class="review-input">
+              <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
+                <%= f.input :content, label: "添加评论"%>
+                <%= f.submit "提交", :disable_with => "提交中",class: "btn btn-default"%>
+              <% end %>
+            </div>
+
+            <table class="table table-striped table-bordered">
+              <tbody>
+                <% @product.reviews.each do |review| %>
+                  <tr>
+                    <td>
+                      <span>
+                        <% if review.user.image.present? %>
+                          <%= image_tag(review.user.image.xsmall.url,style:"border-radius:27px;")%>
+                       <% else %>
+                          <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:50,height:50, style:"border-radius:27px;")%>
+                       <% end %>
+                      </span>
+                      <span>
+                        <% if review.user.nickname.present? %>
+                           <b><%= review.user.nickname %></b>
+                        <% else %>
+                           <b>小红帽</b>
+                        <% end %>
+                      </span> 说：
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%= simple_format(review.content) %>
+                      <% if current_user.present? && review.user.email == current_user.email%>
+                       <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
+                      <% end %>
+                    </td>
+                  </tr>
                 <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <h4>我要评论:</h4>
-      <hr>
-      <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
-        <%= f.input :content %>
-        <%= f.submit "提交评论"%>
-      <% end %>
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="tab-pane fade" id="tab_default_2">
+            <div class="review-description">
+              <p><%= @product.description %></p>
+              <%= image_tag(@product.image.medium.url)%>
+            </div>
+            <div class="review-faq">
+              <p class="review-faq-title text-center">常见问题</p>
+              <p class="review-question">使用什么快递发货？</p>
+              <p class="review-answer">伴客默认使用顺丰快递发货，配送范围覆盖全国大部分地区（港澳台地区除外）。</p>
+              <p class="review-question">如何申请退货？</p>
+              <p class="review-answer">
+                1.自收到商品之日起7日内，顾客可申请无忧退货，退款将原路返还，不同的银行处理时间不同，预计1-5个工作日到账；<br />
+                2.退货流程：<br />
+                确认收货-申请退货-客服审核通过-用户寄回商品-仓库签收验货-退款审核-退款完成；<br />
+                3.因品味伴客产生的退货，如质量问题，退货邮费由品味伴客承担，退款完成后钱款将沿原渠道返还。因客户个人原因产生的退货，购买和寄回运费由客户个人承担。<br />
+              </p>
+              <p class="review-question">如何开具发票？</p>
+              <p class="review-answer">如需开具普通发票，请在下单时联系客服办理，我们将虽货物一起快递给您；</p>
+            </div>
+          </div>
+       </div>
+
     </div>
+  </div>
+
+  <div class="col-md-4 col-xs-4 container">
+    <div class="review-card2">
+      <h3>为您推荐:</h3>
+
+      <div class="product-area clearfix">
+        <% Product.limit(4).sort_by{|product| -product.users.count}.each do |product| %>
+          <div class="col-md-10 col-xs-10 product-list">
+            <div class="product-block">
+              <div class="product-picture">
+                <%= link_to product_path(product) do %>
+                  <% if product.image.present? %>
+                    <%= image_tag(product.image.thumb.url)%>
+                  <% else %>
+                    <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 200 , height: 200 ) %>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <div class="product-word">
+                <div class="product-word1">
+                  ¥ <%= product.price %>
+                  <% if !product.is_favorited?(current_user) %>
+                    <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart",style: "color:rgba(158,158,158 ,1)") %>
+                  <% else %>
+                    <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart", style: "color:rgb(93,64,55);") %>
+                  <% end %>
+                </div>
+              <div class="product-word2">
+                <div class="product-title"><%= product.title %></div>
+                <div class="product-favorite"><%= product.users.count%></div>
+              </div>
+
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+
+
 </div>

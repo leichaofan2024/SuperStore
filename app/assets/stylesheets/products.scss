@@ -295,7 +295,7 @@
 .show-favorit{
   margin-top: 20px;
   margin-left:8px;
-  color:rgba(111,113,111 ,1);
+
   a {
     margin-left:20px;
     font-size: 20px;
@@ -306,4 +306,47 @@
       color:rgb(93,64,55);
     }
   }
+}
+
+// 评论区样式
+
+.review-card{
+  background:rgb(250,246,246);
+  width:100%;
+  margin-bottom:20px;
+  padding:20px;
+  border:1px solid #ddd;
+}
+.review-card2{
+  background:rgb(250,246,246);
+  width:100%;
+  margin:0px auto 20px;
+  padding-bottom:20px;
+  border:1px solid #ddd;
+  h3{
+    margin-left:20px;
+    border-bottom:1px solid #ddd;
+  }
+}
+.review-input{
+  margin-top:30px;
+  margin-bottom:20px;
+}
+.review-faq-title{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #666;
+  font-size: 15px;
+}
+.review-question{
+  color:#666;
+}
+.review-answer{
+  color: #999;
+  margin-bottom: 30px;
+}
+.review-faq{
+  border-top: 1px dotted #dedede;
+  margin-top: 20px;
+  font-weight: 200;
 }
