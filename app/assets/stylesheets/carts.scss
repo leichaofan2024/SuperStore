@@ -50,24 +50,33 @@
   background-color: rgb(250,246,246);
   width:100%;
   height:120px;
-  text-align: center;
   padding-bottom:20px;
   border:1px solid #ddd;
-  .cart-title{
-    width:35%;
-    height:120px;
-    line-height: 120px;
-    text-align: left;
-    padding-left: 15px;
+
+  .cart-picture{
     float:left;
-    vertical-align: middle;
+    width:15%;
+    padding-top:10px;
+    padding-left:15px;
+    height:120px;
+  }
+  .cart-title{
+    width:20%;
+    height:120px;
+    float:left;
+    padding-top: 40px;
+    background-color: green;
+    overflow: scroll;
     a{
       text-decoration: none;
+      vertical-align: bottom;
     }
   }
+
   .cart-price{
     width:15%;
     height:120px;
+    text-align: center;
     line-height: 120px;
     float:left;
     color:rgb(140,142,142);
@@ -75,55 +84,56 @@
   .cart-quantity{
     width:20%;
     height:120px;
+    text-align: center;
     line-height: 120px;
     float:left;
+    .countNumber {
+        padding: 0 24px;
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+       .countNumber-btn {
+        font-size: 22px;
+        width: 30px;
+        height: 30px;
+        line-height: 28px;
+        text-decoration: none;
+        margin-top:45px;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        overflow: hidden;
+        background: #fff;
+        color: #999;
+        border: 1px solid #e0e0e0;
+      }
+       .countNumber-input {
+        font-size: 16px;
+        text-align: center;
+        width: 74px;
+        border: 1px solid #e0e0e0;
+        height: 26px;
+        padding: 14px 4px;
+        outline: none;
+       }
+        .countNumber-btn-plus {
+          right: 0;
+          top: 0;
+       }
+        .countNumber-btn-sub {
+        right: auto;
+        left: 0;
+        top: 0;
+      }
+    }
   }
-  .countNumber {
-  padding: 0 24px;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  .countNumber-btn {
-  	font-size: 22px;
-    width: 30px;
-    height: 30px;
-    line-height: 28px;
-    text-decoration: none;
-    margin-top:45px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    overflow: hidden;
-    background: #fff;
-    color: #999;
-    border: 1px solid #e0e0e0;
-  }
-  .countNumber-input {
-   	font-size: 16px;
-    text-align: center;
-    width: 74px;
-    border: 1px solid #e0e0e0;
-    height: 26px;
-    padding: 14px 4px;
-    outline: none;
-   }
-   .countNumber-btn-plus {
-   	  right: 0;
-    	top: 0;
-   }
-   .countNumber-btn-sub {
-  	right: auto;
-    left: 0;
-    top: 0;
-  }
-}
-
-
 
   .cart-sum{
     width:15%;
     height:120px;
     font-size: 20px;
+    text-align: center;
     weight:10;
     color:rgb(219,56,82);
     line-height: 120px;
@@ -131,6 +141,7 @@
   }
   .cart-remove{
     width:15%;
+    text-align: center;
     height:120px;
     line-height: 120px;
     float:left;
