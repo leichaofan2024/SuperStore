@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except:[:index, :show]
+  before_action :authenticate_user!, except:[:index, :show,:add_to_cart]
   before_action :validates_search_key, only:[:search]
   def index
     @products = Product.all

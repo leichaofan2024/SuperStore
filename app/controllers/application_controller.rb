@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   def require_is_admin
     if !current_user.admin?
       redirect_to "/"
-      flash[:alert] = "你不是管理员"
+      flash[:alert] = "你不是管理员!"
     end
   end
 
@@ -17,14 +17,13 @@ class ApplicationController < ActionController::Base
 
 
   private
-
+ 
   def find_cart
-    cart = Cart.find_by(:user_id => session[:user_id])
+    cart = Cart.find_by(id: session[:cart_id])
     if cart.blank?
       cart = Cart.create
-      cart.user = current_user
     end
-    session[:user_id] = cart.user_id
+    session[:cart_id] = cart.id
     return cart
   end
 end
