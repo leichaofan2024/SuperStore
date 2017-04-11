@@ -19,6 +19,24 @@ class CartitemsController < ApplicationController
     redirect_to carts_path, alert: "成功将#{@cartitem.title}从购物车中删除！"
   end
 
+  def reduce_quantity
+    @cartitem = Cartitem.find(params[:id])
+    if @cartitem.quantity > 0
+      @cartitem.quantity -= 1
+    else
+      flash[:warning] = "亲，已经没的减啦！"
+    end
+    @cartitem.save
+    redirect_to carts_path
+  end
+
+  def add_quantity
+    @cartitem = Cartitem.find(params[:id])
+    @cartitem.quantity += 1
+    @cartitem.save
+    redirect_to carts_path
+  end
+
 
   private
 

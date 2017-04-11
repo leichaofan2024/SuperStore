@@ -15,7 +15,13 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :cartitems
+  resources :cartitems do
+    member do
+      post :reduce_quantity
+      post :add_quantity
+    end
+  end 
+
   resources :products do
     resources :reviews
     collection do
