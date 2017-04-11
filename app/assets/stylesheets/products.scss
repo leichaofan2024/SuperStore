@@ -19,6 +19,15 @@
   background:#fff;
   box-shadow: rgba(0,0,0,.1) 0 1px 5px;
 }
+.header-show {
+  width: 100%;
+  // position: fixed;
+  top:0;
+  left:0;
+  height:80px;
+  z-index:100;
+
+}
 .header-content{
   margin-left:auto !important;
   margin-right:auto !important;
@@ -349,4 +358,7 @@
   border-top: 1px dotted #dedede;
   margin-top: 20px;
   font-weight: 200;
+}
+.review-description{
+  margin-top:20px;
 }

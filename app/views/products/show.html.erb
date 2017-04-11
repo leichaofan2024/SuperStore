@@ -1,5 +1,24 @@
 <div class="show-frame">
 
+  <div class="header-show">
+    <div class="header-content clearfix">
+      <div class="logo">
+        <%= link_to("茗香阁", products_path )%>
+      </div>
+      <div class="search-bar">
+        <%= render "products/search_bar"%>
+      </div>
+      <div class="cart-bar">
+        <div class="cart">
+          <%= link_to carts_path do %>
+             <i class="fa fa-shopping-cart fa-lg"></i>购物车
+            <span><%= current_cart.cartitems.count %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <p class="show-nav">
       <%= link_to("首页", products_path, style:"text-decoration:none") %> >
       <%= link_to(@product.category.name, products_path(:category => @product.category.id),style:"text-decoration:none")%> >
@@ -7,6 +26,7 @@
     </p>
 
   <div class="container show-card">
+
     <div class="col-md-6 col-xs-12 show-picture">
       <% if @product.image.present? %>
         <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
@@ -15,7 +35,7 @@
       <% end %>
     </div>
     <div class="col-md-6 col-xs-12">
-      <h3><%= @product.title %></h3>
+      <h3><%= simple_format(@product.title) %></h3>
       <div class="show-service">
         <p class="price">售价 <span class="rmb">￥</span><span class="price"><%= @product.price %></span></p>
         <p class="service">服务 <span class="service-detail">7天无忧退货 | 48小时快速退款 | 正品保证</span></p>
@@ -128,7 +148,7 @@
     </div>
   </div>
 
-  <div class="col-md-4 col-xs-4 container">
+  <div class="col-md-4 col-xs-4">
     <div class="review-card2">
       <h3>为您推荐:</h3>
 
