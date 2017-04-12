@@ -43,14 +43,14 @@
           <div class="cart-title">
             <%= link_to(cartitem.product.title, product_path(cartitem.product)) %>
           </div>
-          
+
           <div class="cart-price">
             <%= cartitem.product.price %>
           </div>
           <div class="cart-quantity">
             <div class="countNumber">
               <%= link_to("-", reduce_quantity_cartitem_path(cartitem), class: "countNumber-btn countNumber-btn-sub", method: :post, remote: true) %>
-              <input class="countNumber-input" type="integer" value="<%= cartitem.quantity %>">
+              <input class="countNumber-input" type="integer" name="quantity" value="<%= cartitem.quantity %>">
               <%= link_to("+", add_quantity_cartitem_path(cartitem), class: "countNumber-btn countNumber-btn-plus", method: :post, remote: true) %>
             </div>
           </div>
