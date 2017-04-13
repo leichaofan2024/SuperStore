@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
   root "products#index"
+  get "welcome/index"
   namespace :admin do
     resources :categories
     resources :products
