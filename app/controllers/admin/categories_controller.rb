@@ -1,7 +1,5 @@
-class Admin::CategoriesController < ApplicationController
-  layout "admin"
-  before_action :authenticate_user!
-  before_action :require_is_admin
+class Admin::CategoriesController < AdminController
+
   before_action :find_category, only: [:edit,:update,:destroy]
 
   def index
@@ -31,7 +29,7 @@ class Admin::CategoriesController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @category.destroy
     redirect_to admin_categories_path
