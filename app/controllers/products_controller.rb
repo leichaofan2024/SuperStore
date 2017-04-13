@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index, :show,:add_to_cart]
   before_action :validates_search_key, only:[:search]
+  before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite]
   def index
     @products = Product.all
     if params[:favorite] == "yes"
@@ -18,16 +19,13 @@ class ProductsController < ApplicationController
     if params[:order] == "hot"
       @products = @products.sort_by{|product|  product.users.count}.reverse
     end
-
   end
 
   def show
-    @product = Product.find(params[:id])
     @review = Review.new
   end
 
   def add_to_cart
-    @product = Product.find(params[:id])
     if !current_cart.products.include?(@product)
       current_cart.add_product_to_cart(@product)
       flash[:notice] = "你已成功将#{@product.title}加入购物车!"
@@ -36,14 +34,13 @@ class ProductsController < ApplicationController
     end
     redirect_to :back
   end
+
   def add_to_favorite
-    @product = Product.find(params[:id])
     @product.add_to_favorite!(current_user)
     redirect_to :back, notice: "加入收藏!"
   end
 
   def quit_favorite
-    @product = Product.find(params[:id])
     @product.quit_favorite!(current_user)
     redirect_to :back, notice: " 取消收藏！"
   end
@@ -51,8 +48,14 @@ class ProductsController < ApplicationController
   def search
     @products = Product.ransack({:title_or_description_cont => @q}).result(distinct: true)
   end
+
   protected
+  
   def validates_search_key
     @q = params[:query_string].gsub(/\\|\'|\/|\?/, "") if params[:query_string].present?
+  end
+
+  def find_product
+    @product = Product.find(params[:id])
   end
 end

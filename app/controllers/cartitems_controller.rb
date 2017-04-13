@@ -14,7 +14,6 @@ class CartitemsController < ApplicationController
   def destroy
     @cart = current_cart
     @cartitem = @cart.cartitems.find(params[:id])
-    # @product = @cartitem.product
     @cartitem.destroy
     redirect_to carts_path, alert: "成功将#{@cartitem.title}从购物车中删除！"
   end
@@ -43,4 +42,5 @@ class CartitemsController < ApplicationController
   def cartitem_params
     params.require(:cartitem).permit(:quantity)
   end
+  
 end

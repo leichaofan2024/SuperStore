@@ -2,7 +2,7 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_is_admin
   layout "admin"
-
+  before_action :find_product, only:[:edit, :update, :destroy]
 
   def index
       @products = Product.all
@@ -18,8 +18,6 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    # @product.category_id = params[:category_id]
-    # @product.category = Category.all.where(name: params[:category_id])
     if @product.save
       redirect_to admin_products_path，notice: "成功新增产品！"
     else
@@ -28,12 +26,10 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
     @categories = Category.all.map{|c| [c.name,c.id]}
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to admin_products_path, notice: "更新成功!"
     else
@@ -42,7 +38,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to admin_products_path, alert: "删除成功！"
   end
@@ -52,4 +47,9 @@ class Admin::ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:title, :description, :price, :quantity, :image ,:category_id)
   end
+
+  def find_product
+    @product = Product.find(params[:id])
+  end
+
 end
