@@ -38,14 +38,14 @@ class Admin::ProductsController < AdminController
       @product.photos.destroy_all
 
       params[:photos]["avatar"].each do |a|
-        @picture = @produdct.photos.create(:avatar => a)
+        @picture = @product.photos.create(:avatar => a)
       end
 
       @product.update(product_params)
       redirect_to admin_products_path, notice: "更新成功!"
     elsif @product.update(product_params)
       redirect_to admin_products_path
-    else 
+    else
       render :edit
     end
   end
