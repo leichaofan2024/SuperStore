@@ -31,8 +31,8 @@
           <div class="cart-picture">
             <%= link_to product_path(cartitem.product) do %>
 
-             <% if cartitem.product.image.present? %>
-                <%= image_tag(cartitem.product.image.small.url) %>
+             <% if cartitem.product.photos[0].present? %>
+                <%= image_tag(cartitem.product.photos[0].avatar.small.url) %>
               <% else %>
                 <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"100", height:"100", class: "thumbnail" ) %>
               <% end %>

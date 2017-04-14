@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
 
   def show
     @review = Review.new
+    @photos = @product.photos.all
   end
 
   def add_to_cart
@@ -50,7 +51,7 @@ class ProductsController < ApplicationController
   end
 
   protected
-  
+
   def validates_search_key
     @q = params[:query_string].gsub(/\\|\'|\/|\?/, "") if params[:query_string].present?
   end

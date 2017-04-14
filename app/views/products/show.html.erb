@@ -27,11 +27,45 @@
 
   <div class="container show-card">
 
-    <div class="col-md-6 col-xs-12 show-picture">
-      <% if @product.image.present? %>
-        <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
+    <div class="col-md-6 col-xs-12 ">
+
+      <% if @photos.present? %>
+       <div class="tab-content show-picture">
+         <% if @product.photos[0].present? %>
+         <div class="tab-pane active" id="pic-1"><%= image_tag(@photos[0].avatar.medium.url) %></div>
+         <% end %>
+         <% if @product.photos[1].present? %>
+         <div class="tab-pane" id="pic-2"><%= image_tag(@photos[1].avatar.medium.url) %></div>
+         <% end %>
+         <% if @product.photos[2].present? %>
+         <div class="tab-pane" id="pic-3"><%= image_tag(@photos[2].avatar.medium.url) %></div>
+         <% end %>
+         <% if @product.photos[3].present? %>
+         <div class="tab-pane" id="pic-4"><%= image_tag(@photos[3].avatar.medium.url) %></div>
+         <% end %>
+         <% if @product.photos[4].present? %>
+         <div class="tab-pane" id="pic-5"><%= image_tag(@photos[4].avatar.medium.url) %></div>
+         <% end %>
+       </div>
+       <ul class="show-photo-xsmall-box nav nav-tabs">
+         <% if @product.photos[0].present? %>
+         <li class="active"><a href="#pic-1" data-toggle="tab"><%= image_tag(@photos[0].avatar.xsmall.url) %></a></li>
+         <% end %>
+         <% if @product.photos[1].present? %>
+         <li><a href="#pic-2" data-toggle="tab"><%= image_tag(@photos[1].avatar.xsmall.url) %></a></li>
+         <% end %>
+         <% if @product.photos[2].present? %>
+         <li><a href="#pic-3" data-toggle="tab"><%= image_tag(@photos[2].avatar.xsmall.url) %></a></li>
+         <% end %>
+         <% if @product.photos[3].present? %>
+         <li><a href="#pic-4" data-toggle="tab"><%= image_tag(@photos[3].avatar.xsmall.url)%></a></li>
+         <% end %>
+         <% if @product.photos[4].present? %>
+         <li><a href="#pic-5" data-toggle="tab"><%= image_tag(@photos[4].avatar.xsmall.url)%></a></li>
+         <% end %>
+       </ul>
       <% else %>
-        <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", class: "thumbnail") %>
+        <%= image_tag("http://placehold.it/400x400&text=No Pic", class:"thumbnail") %>
       <% end %>
     </div>
     <div class="col-md-6 col-xs-12">
@@ -123,15 +157,29 @@
           </div>
 
 
-          <div class="tab-pane fade" id="tab_default_2">
-            <div class="review-description">
+          <div class="tab-pane show-fade" id="tab_default_2">
+            <div class="review-description clearfix">
               <p><%= @product.description %></p>
-              <%= image_tag(@product.image.medium.url)%>
+              <% if @photos.present? %>
+                <% @photos.each_with_index do |p, index| %>
+                  <% if index== 0 %>
+                  <div class="col-md-12 col-xs-12 review-p1">
+                    <%= image_tag p.avatar.medium.url %>
+                  </div>
+                  <% else %>
+                    <div class="col-md-6 col-xs-6 review-p2" style="letter-spacing: -8px">
+                      <%= image_tag p.avatar.thumb.url %>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= image_tag("http://placehold.it/400x400&text=No Pic", class:"thumbnail") %>
+              <% end %>
             </div>
             <div class="review-faq">
               <p class="review-faq-title text-center">常见问题</p>
               <p class="review-question">使用什么快递发货？</p>
-              <p class="review-answer">伴客默认使用顺丰快递发货，配送范围覆盖全国大部分地区（港澳台地区除外）。</p>
+              <p class="review-answer">茗香阁默认使用顺丰快递发货，配送范围覆盖全国大部分地区（港澳台地区除外）。</p>
               <p class="review-question">如何申请退货？</p>
               <p class="review-answer">
                 1.自收到商品之日起7日内，顾客可申请无忧退货，退款将原路返还，不同的银行处理时间不同，预计1-5个工作日到账；<br />

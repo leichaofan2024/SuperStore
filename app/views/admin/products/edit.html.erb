@@ -10,11 +10,14 @@
     <%= f.input :quantity, :label => "库存" %>
     <%= f.label "茶叶品种"%><br>
     <%= f.select(:category_id,@categories) %><br><br>
-    <% if @product.image.present? %>
+    <% if @product.photos.present? %>
       <%= f.label "当前图片" %><br>
-      <%= image_tag(@product.image.thumb.url) %>
+      <% @product.photos.each do |p| %>
+      <%= image_tag p.avatar.thumb.url %><br>
+      <% end %>
     <% end %>
-    <%= f.input :image, as: :file, :label => "上传图片"%>
+    <%= f.label :avatar %><br>
+    <%= f.file_field :avatar, :mutiple => true, name: "photos[avatar][]" %>
     <%= f.submit "确定", data:{ disable_with: "Submitting..."} %>
   <% end %>
 </div>

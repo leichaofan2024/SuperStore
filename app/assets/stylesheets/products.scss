@@ -242,6 +242,33 @@
 .show-picture {
   margin-top:30px;
 }
+.show-photo-xsmall-box{
+  height:80px;
+  width:400px;
+  // border:none;
+  // background: none;
+}
+.show-photo-xsmall-box.nav-tabs {
+  // border: none;
+  margin-top: 15px; }
+
+.show-photo-xsmall-box.nav-tabs li {
+  width: 18%;
+  margin-right: 2.5%;
+}
+.show-photo-xsmall-box.nav-tabs li img {
+  // max-width: 100%;
+  // display: block;
+  // border: 1px solid #ddd;
+}
+.show-photo-xsmall-box.nav-tabs li a {
+  padding: 0;
+  margin: 0;
+}
+.show-photo-xsmall-box.nav-tabs li:last-of-type {
+  margin-right: 0;
+}
+
 .show-service{
   margin-top: 30px;
   margin-bottom: 30px;
@@ -360,5 +387,12 @@
   font-weight: 200;
 }
 .review-description{
-  margin-top:20px;
+  margin:20px auto;
+  width:400px;
+  .review-p1{
+    margin-bottom:20px;
+  }
+  .review-p2{
+    margin-bottom:20px;
+  }
 }
