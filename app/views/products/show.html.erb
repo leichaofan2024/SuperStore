@@ -105,16 +105,16 @@
 
         <ul class="nav nav-tabs">
           <li class="active">
-            <a data-toggle="tab" href="#tab_default_1" >宝贝评价(<%= "#{@product.reviews.count}" %>) </a>
+            <a data-toggle="tab" href="#tab_default_1" >宝贝详情</a>
           </li>
           <li>
-            <a data-toggle="tab" href="#tab_default_2">宝贝详情 </a>
+            <a data-toggle="tab" href="#tab_default_2">宝贝评价(<%= "#{@product.reviews.count}" %>)  </a>
           </li>
 
         </ul>
 
        <div class="tab-content">
-          <div class="tab-pane fade in active" id="tab_default_1">
+          <div class="tab-pane " id="tab_default_2">
             <div class="review-input">
               <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
                 <%= f.input :content, label: "添加评论"%>
@@ -157,16 +157,21 @@
           </div>
 
 
-          <div class="tab-pane show-fade" id="tab_default_2">
+          <div class="tab-pane active" id="tab_default_1">
             <div class="review-description clearfix">
               <p><%= @product.description %></p>
+              <hr>
               <% if @photos.present? %>
                 <% @photos.each_with_index do |p, index| %>
                   <% if index== 0 %>
                   <div class="col-md-12 col-xs-12 review-p1">
+                    <p class="text-center">产品展示</p>
                     <%= image_tag p.avatar.medium.url %>
+                    <hr>
+                    <p class="text-center">产品细节</p>
                   </div>
                   <% else %>
+
                     <div class="col-md-6 col-xs-6 review-p2" style="letter-spacing: -8px">
                       <%= image_tag p.avatar.thumb.url %>
                     </div>
