@@ -41,7 +41,10 @@
 
              </a>
              <ul class="dropdown-menu">
+               <% if current_user.admin? %>
                <li><%= link_to("后台管理", admin_products_path) %></li>
+               <% end %>
+
                <li><%= link_to("编辑个人资料", edit_user_path(current_user))%></li>
 
                <li class="divider"></li>
