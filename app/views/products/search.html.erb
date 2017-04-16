@@ -1,5 +1,14 @@
 <%= render partial: "head_of_index" %>
 
 <div class="product-area clearfix">
-  <%= render partial: "product_list", :collection => @products, :as => :product %>
+  <% if @products.blank? %>
+    抱歉，没有找到您要的商品。。。
+    <hr>
+    <div class="">
+      <h4>为您推荐：</h4>
+      <%= render partial: "product_list", :collection => Product.limit(4).sort_by{|product| -product.users.count}, :as => :product %>
+    </div>
+  <% else %>
+    <%= render partial: "product_list", :collection => @products, :as => :product %>
+  <% end %>
 </div>

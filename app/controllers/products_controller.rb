@@ -10,13 +10,11 @@ class ProductsController < ApplicationController
     if params[:category].present?
       @products = Product.all.where(category_id: params[:category]).recent
     end
-   if params[:order] == "latest"
+    if params[:order] == "latest"
       @products = @products.recent
-    end
-    if params[:order] == "price"
+    elsif params[:order] == "price"
       @products = @products.order("price DESC")
-    end
-    if params[:order] == "hot"
+    elsif params[:order] == "hot"
       @products = @products.sort_by{|product|  product.users.count}.reverse
     end
   end
