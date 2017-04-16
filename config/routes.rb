@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     member do
       post :add_to_cart
+      post :pay_now
       post :add_to_favorite
       post :quit_favorite
     end

@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index, :show,:add_to_cart]
   before_action :validates_search_key, only:[:search]
-  before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite]
+  before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite, :pay_now]
   def index
     @products = Product.all
     if params[:favorite] == "yes"
@@ -49,7 +49,15 @@ class ProductsController < ApplicationController
   def search
     @products = Product.ransack({:title_or_description_cont => @q}).result(distinct: true)
   end
-
+  def pay_now
+    @product = Product.find(params[:id])
+    if !current_cart.products.include?(@product)
+      current_cart.add_product_to_cart(@product)
+    else
+      flash[:warning] = "购物车已有此商品!"
+    end
+    redirect_to carts_path
+  end
   protected
 
   def validates_search_key

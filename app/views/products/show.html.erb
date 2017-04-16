@@ -1,23 +1,6 @@
 <div class="show-frame">
 
-  <div class="header-show">
-    <div class="header-content clearfix">
-      <div class="logo">
-        <%= link_to("茗香阁", products_path )%>
-      </div>
-      <div class="search-bar">
-        <%= render "products/search_bar"%>
-      </div>
-      <div class="cart-bar">
-        <div class="cart">
-          <%= link_to carts_path do %>
-             <i class="fa fa-shopping-cart fa-lg"></i>购物车
-            <span><%= current_cart.cartitems.count %></span>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render :partial => "head_of_index" %>
 
     <p class="show-nav">
       <%= link_to("首页", products_path, style:"text-decoration:none") %> >
@@ -80,13 +63,23 @@
       </div>
       <!-- <p style="height:100px;"><%= simple_format(@product.description) %></p> -->
 
-      <div class="show-action">
+      <div class="show-action clearfix">
         <% if @product.quantity.present? && @product.quantity > 0 %>
-          <%= link_to("加入购物车",add_to_cart_product_path(@product),method: :post, class: "btn btn-lg") %>
+          <%= link_to("加入购物车",add_to_cart_product_path(@product),method: :post, class: "btn btn-lg a1") %>
+          <%= link_to("立即购买", pay_now_product_path(@product), method: :post, class:"btn btn-lg a2", style: "background-color:none;") %>
+          <div class="show-scan col-md-5">
+            <a href="#scan" data-toggle="collapse">扫码支付</a>
+            <b class="caret"></b>
+            <div class="collapse" id="scan">
+              <img src="https://ww4.sinaimg.cn/large/006tNbRwly1feomfchjg2j308r08s0ts.jpg" alt="加载中。。。" width=120 height=120 >
+            </div>
+          </div>
         <% else %>
           <%= link_to("已售罄","#",class: "btn btn-lg", style:"background-color:gray;") %>
         <% end %>
       </div>
+
+
       <div class="show-favorit">
 
           收藏人气(<%= @product.users.count %>)

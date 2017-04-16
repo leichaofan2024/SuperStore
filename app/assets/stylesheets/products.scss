@@ -317,19 +317,36 @@
 .show-action{
   padding-top:30px;
 
-  a{
+  .a1{
     width:200px;
     color:white;
     weight:10;
     border-radius: 20px;
+    display: block;
+    margin-bottom: 10px;
     background:rgba(215,40,45,1);
   }
-  a:hover{
+  .a1:hover{
     background: rgba(210,38,40 ,1);
+  }
+  .a2{
+    width:200px;
+    color:rgb(93,64,55);
+    weight:10;
+    border:1px solid rgb(93,64,55);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    float:left;
+  }
+  .show-scan{
+    float:left;
+    margin-left: 20px;
+    .collapse{
+    }
   }
 }
 .show-favorit{
-  margin-top: 20px;
+  margin-top:15px;
   margin-left:8px;
 
   a {
