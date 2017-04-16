@@ -414,4 +414,24 @@
   }
 }
 
-// 放大镜
+// 回到顶部
+  .back-to-top{
+    position:fixed;
+    bottom:100px;
+    right:20px;
+    width:40px;
+    height:40px;
+    background-color: rgba(117,117,117 ,0.5);
+    border-radius:20px;
+    a{
+      margin-top: 0;
+      margin-left: 0;
+      i{
+        position:relative;
+        font-size:20px;
+        color:white;
+        left:11px;
+        top:10px;
+      }
+    }
+  }
