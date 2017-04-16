@@ -1,22 +1,4 @@
-<div class="header_placeholder h80"></div>
-<div class="header">
-  <div class="header-content clearfix">
-    <div class="logo">
-      <%= link_to("茗香阁", products_path )%>
-    </div>
-    <div class="search-bar">
-      <%= render "products/search_bar"%>
-    </div>
-    <div class="cart-bar">
-      <div class="cart">
-        <%= link_to carts_path do %>
-           <i class="fa fa-shopping-cart fa-lg"></i>购物车
-          <span><%= current_cart.cartitems.count %></span>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render :partial => "head_of_index" %>
 
 <div class="category-bar">
   <span><%= link_to("全部商品", products_path, class:"btn btn-secondary active")%></span>
@@ -33,36 +15,6 @@
 </div>
 
 <div class="product-area clearfix">
-  <% @products.each do |product| %>
-    <div class="col-md-3 col-xs-6 product-list">
-      <div class="product-block">
-        <div class="product-picture">
-          <%= link_to product_path(product) do %>
-            <% if product.photos.present? %>
-              <%= image_tag(product.photos[0].avatar.thumb.url) %>
-            <% else %>
-              <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 200 , height: 200 ) %>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="product-word">
-          <div class="product-word1">
-            ¥ <%= product.price %>
-            <% if !product.is_favorited?(current_user) %>
-              <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart",style: "color:rgba(158,158,158 ,1)") %>
-            <% else %>
-              <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart", style: "color:rgb(93,64,55);") %>
-            <% end %>
-          </div>
-        <div class="product-word2">
-          <div class="product-title"><%= product.title %></div>
-          <div class="product-favorite"><%= product.users.count%></div>
-        </div>
-
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render :partial => "product_list", :collection => @products, as: :product %>
 </div>
 <p class="text-center product-ending">没有更多商品了</p>
