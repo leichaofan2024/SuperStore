@@ -32,7 +32,11 @@ class CartitemsController < ApplicationController
   def add_quantity
     @cartitem = Cartitem.find(params[:id])
     @cartitem.quantity += 1
-    @cartitem.save
+    if @cartitem.quantity < @cartitem.product.quantity + 1
+      @cartitem.save
+    else
+      flash[:warning] = "库存不足，不能再加啦！"
+    end 
     redirect_to carts_path
   end
 
@@ -42,5 +46,5 @@ class CartitemsController < ApplicationController
   def cartitem_params
     params.require(:cartitem).permit(:quantity)
   end
-  
+
 end

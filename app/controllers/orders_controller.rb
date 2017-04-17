@@ -11,12 +11,16 @@ class OrdersController < ApplicationController
     if @order.save
 
       current_cart.cartitems.each do |cartitem|
+
         product_list = ProductList.new
         product_list.order = @order
         product_list.product_name = cartitem.product.title
         product_list.product_price = cartitem.product.price
         product_list.quantity = cartitem.quantity
         product_list.save
+        @product = cartitem.product
+        @product.quantity -= cartitem.quantity
+        @product.save
       end
       current_cart.clean!
       OrderMailer.notify_order_placed(@order).deliver!
