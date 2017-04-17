@@ -1,0 +1,19 @@
+<div class="pull-right">
+  <%= link_to("新增分类",new_admin_category_path, class:"btn btn-default") %>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <th>种类名称</th>
+    <th>编辑</th>
+    <th>删除</th>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to(category.name, admin_products_path(category: category.id)) %></td>
+        <td><%= link_to("Edit", edit_admin_category_path(category), class: "btn btn-default") %></td>
+        <td><%= link_to("Delete", admin_category_path(category), method: :delete, data:{confirm: "确定要删除此类吗？"}, class: "btn btn-danger")%></td>
+     </tr>
+    <% end %>
+  </tbody>
+</table>

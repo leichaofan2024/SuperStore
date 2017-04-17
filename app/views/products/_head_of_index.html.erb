@@ -1,0 +1,18 @@
+<div class="header">
+  <div class="header-content clearfix">
+    <div class="logo">
+      <%= link_to("茗香阁", products_path )%>
+    </div>
+    <div class="search-bar">
+      <%= render "products/search_bar"%>
+    </div>
+    <div class="cart-bar">
+      <div class="cart">
+        <%= link_to carts_path do %>
+           <i class="fa fa-shopping-cart fa-lg"></i>购物车
+          <span><%= current_cart.cartitems.count %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="cart-frame">
+  <div class="cart-header clearfix">
+    <h3>购物车宝贝:</h3>
+    <%= link_to("清空购物车", clean_carts_path, method: :delete, data: {:confirm => "你确定要清空整个购物车吗？"}, class: "btn pull-right") %>
+  </div>
+
+  <div class="cart-thead">
+    <div class="cart-title">
+      商品信息
+    </div>
+    <div class="cart-price">
+      单价
+    </div>
+    <div class="cart-quantity">
+       数量
+    </div>
+    <div class="cart-sum">
+       小记（元）
+    </div>
+    <div class="cart-remove">
+       操作
+    </div>
+  </div>
+
+  <% current_cart.cartitems.each do |cartitem| %>
+
+      <div class="cart-tbody">
+
+        <% if cartitem.product.present? %>
+
+          <div class="cart-picture">
+            <%= link_to product_path(cartitem.product) do %>
+
+             <% if cartitem.product.photos[0].present? %>
+                <%= image_tag(cartitem.product.photos[0].avatar.small.url) %>
+              <% else %>
+                <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width:"100", height:"100", class: "thumbnail" ) %>
+              <% end %>
+
+            <% end %>
+          </div>
+
+          <div class="cart-title">
+            <%= link_to(cartitem.product.title, product_path(cartitem.product)) %>
+          </div>
+
+          <div class="cart-price">
+            <%= cartitem.product.price %>
+          </div>
+          <div class="cart-quantity">
+            <div class="countNumber">
+              <%= link_to("-", reduce_quantity_cartitem_path(cartitem), class: "countNumber-btn countNumber-btn-sub", method: :post, remote: true) %>
+              <input class="countNumber-input" type="integer" name="quantity" value="<%= cartitem.quantity %>">
+              <%= link_to("+", add_quantity_cartitem_path(cartitem), class: "countNumber-btn countNumber-btn-plus", method: :post, remote: true) %>
+            </div>
+          </div>
+          <div class="cart-sum">
+            <% if cartitem.product.price.present? %>
+              <%= cartitem.quantity * cartitem.product.price %> ¥
+            <% else %>
+              0 ¥
+            <% end %>
+          </div>
+          <div class="cart-remove">
+            <%= link_to("移除商品", cartitem_path(cartitem), method: :delete, data:{confirm: "Are you sure?"}, class: "btn") %>
+          </div>
+
+        <% else %>
+
+          <div class="cart-picture">
+
+            <%= image_tag("https://ww2.sinaimg.cn/large/006tNc79gy1fe6gtfxntqj30ci09et97.jpg", width:"100", height:"100") %>
+          </div>
+          <div class="cart-title">
+            <%= cartitem.title %>
+          </div>
+          <div class="cart-price">
+
+          </div>
+          <div class="cart-quantity">
+             <%= cartitem.quantity %>
+          </div>
+          <div class="cart-sum">
+             此产品已过期
+          </div>
+          <div class="cart-remove">
+            <%= link_to("移除商品", cartitem_path(cartitem), method: :delete, data:{confirm: "Are you sure?"}, class: "btn") %>
+          </div>
+
+        <% end %>
+
+      </div>
+  <% end %>
+
+  <div class="cart-checkout">
+    <%= link_to("确认结账", checkout_carts_path, method: :post, class: "btn btn-danger btn-lg pull-right" ) %>
+     <span><%= render_cart_total_price(current_cart) %> RMB</span>
+     <b>总计:</b>
+  </div>
+
+
+</div>

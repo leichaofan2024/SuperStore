@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html style="height:100%;">
   <head>
-    <title>SuperStore</title>
+    <title>信阳毛尖</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="min-height:100%">
+  <body style="height:100%;">
+    <div class=" layout-application clearfix">
 
       <%= render "common/navbar" %>
-
-    <div class="container-fluid" style="padding-bottom:100px;margin-top:70px; margin-bottom:-100px">
       <%= render "common/flashes"%>
       <%= yield %>
     </div>

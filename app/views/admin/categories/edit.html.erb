@@ -1,0 +1,6 @@
+<h2>编辑分类</h2>
+<hr>
+<%= simple_form_for [:admin,@category] do |f| %>
+  <%= f.input :name, label:"分类名称" %>
+  <%= f.submit "确定"%>
+<% end %>

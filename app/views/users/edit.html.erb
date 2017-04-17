@@ -1,0 +1,21 @@
+<div class="" style= "">
+  <div class="" style="width:50%;margin:30px auto;">
+    <h4>账户：<%= current_user.email %></h4>
+    <% if current_user.nickname.present?%>
+      <h4>昵称：<%= current_user.nickname %></h4>
+    <% else %>
+      <h4>昵称：XXX</h4>
+    <% end %>
+    <%= simple_form_for @user do |f| %>
+      <%= f.label "当前头像" %>
+      <% if @user.image.present? %>
+        <%= image_tag(@user.image.thumb.url, class:"thumbnail") %>
+      <% else %>
+        <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg", width: 200,height:200,class:"thumbnail")%>
+      <% end %>
+      <%= f.input :image, as: :file,label: "更改头像"%>
+      <%= f.input :nickname, label: "昵称",placeholder: "输入新的昵称..." %>
+      <%= f.submit "确定"%>
+    <% end %>
+  </div>
+</div>

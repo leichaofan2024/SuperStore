@@ -1,11 +1,16 @@
 
-<nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+<nav class="navbar navbar-default" role="navigation" id="navigation-bar">
 
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class= "navbar-brand" href="/">SuperStrore</a>
+      <a class= "navbar-brand" href="/"><span class="navbar1"></span>一缕茶香</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class=""><%= link_to("商品首页", products_path) %></li>
+        <li><%= link_to("关于我们",about_path)%></li>
+      </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user.present? %>
           <li>
@@ -15,14 +20,36 @@
             <%= link_to(content_tag(:i,"登录", class: "fa fa-sign-in"), new_user_session_path) %>
           </li>
         <% else %>
+          <li><%= link_to("我的订单", account_orders_path) %></li>
+          <li><%= link_to(content_tag(:i, "我的收藏", class: "fa fa-heart fa-md"), products_path(:favorite => "yes"))%> </li>
           <li class="drodown">
-             <a href="#" class="dropdown-toggle" data-toggle= "dropdown">
-               你好, <%= current_user.email %>
-               <b class="caret"></b>
+             <a href="#" class="dropdown-toggle clearfix" data-toggle= "dropdown" style="height:50px;">
+               <b class="caret navbar-right"></b>
+               <span class= "navbar-right clearfix">
+                 <% if current_user.nickname.present? %>
+                  你好， <%= current_user.nickname %>
+                 <% else %>
+                   你好，<%= current_user.email %>
+                 <% end %>
+               </span>
+               <span class="navbar-right avatar clearfix">
+                 <% if current_user.image.present? %>
+                   <%= image_tag(current_user.image.xxsmall.url,style:"border-radius:20px;")%>
+                 <% else %>
+                   <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:40,height:40, style:"border-radius:20px;")%>
+                 <% end %>
+               </span>
+
              </a>
              <ul class="dropdown-menu">
-               <li class="devider"></li>
-               <li><%= link_to(content_tag(:i, "登出",class: 'fa fa-sign-out'), destroy_user_session_path, method: :delete) %></li>
+               <% if current_user.admin? %>
+               <li><%= link_to("后台管理", admin_products_path) %></li>
+               <% end %>
+
+               <li><%= link_to("编辑个人资料", edit_user_path(current_user))%></li>
+
+               <li class="divider"></li>
+               <li><%= link_to(content_tag(:i, "退出",class: 'fa fa-sign-out'), destroy_user_session_path, method: :delete) %></li>
              </ul>
           </li>
         <% end %>

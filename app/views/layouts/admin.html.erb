@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html style="height:100%">
+  <head>
+    <title>后台-信阳毛尖</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="height:100%">
+    <div class="container-fluid layout-admin clearfix">
+
+      <%= render "common/navbar" %>
+
+
+      <%= render "common/flashes"%>
+      <div class="col-md-2 col-xs-4">
+        <ul class="nav nav-pills nav-stacked">
+          <li><%= link_to("后台列表", admin_products_path, class: "btn btn-primary sidebar") %> </li>
+          <li><%= link_to("订单列表", admin_orders_path, class: "btn btn-primary sidebar") %></li>
+          <li><%= link_to("商品分类", admin_categories_path, class: "btn btn-primary sidebar") %></li>
+        </ul>
+      </div>
+      <div class="col-md-10">
+        <%= yield %>
+      </div>
+    </div>
+    <%= render "common/footer" %>
+  </body>
+</html>

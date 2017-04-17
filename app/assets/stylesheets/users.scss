@@ -1,0 +1,55 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sessions-new-frame{
+  background:rgb(250,246,246);
+  width:50%;
+  height:100%;
+  margin:20px auto;
+  .frame-2{
+    width:60%;
+    margin:5px auto;
+    h2{
+      color:rgb(93,64,55);
+      text-align: center;
+    }
+    .form-actions{
+      width:50%;
+      margin:5px auto;
+      .session-login{
+        width:100%;
+        border-radius: 20px;
+        color:white;
+        font-size:17px;
+        background-color: rgb(93,64,55);
+      }
+    }
+  }
+}
+.registration-frame{
+  background:rgb(250,246,246);
+  width:50%;
+  height:100%;
+  margin:20px auto;
+  .frame-2{
+    width:60%;
+    margin:5px auto;
+    h2{
+      text-align: center;
+      color:rgb(93,64,55);
+    }
+    .form-actions{
+      width:50%;
+      margin:5px auto;
+      .registration-sign-up{
+        width:100%;
+        background-color: rgb(93,64,55);
+        border-radius:25px;
+        font-size: 17px;
+        color:white;
+      }
+    }
+  }
+
+}

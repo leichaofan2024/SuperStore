@@ -1,0 +1,28 @@
+<div class="col-md-8 col-xs-12">
+  <div class="text-center">
+    <h3>商品编辑</h3>
+    <hr>
+  </div>
+  <%= simple_form_for [:admin, @product] do |f| %>
+    <%= f.input :title,:label => "茶叶名称" %>
+    <%= f.input :description, :label => "详细描述" %>
+    <%= f.input :price, :label => "单价" %>
+    <%= f.input :quantity, :label => "库存" %>
+    <%= f.label "茶叶品种"%><br>
+    <%= f.select(:category_id,@categories) %><br><br>
+    <div class="clearfix">
+      <% if @product.photos.present? %>
+        <%= f.label "当前图片" %><br>
+        <% @product.photos.each do |p| %>
+        <div class="col-md-4 clearfix">
+          <%= image_tag p.avatar.thumb.url %><br>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <br>
+    <%= f.label "上传产品图（支持同时上传多图）" %>
+    <%= f.file_field :avatar, :multiple => true, name: "photos[avatar][]"%><br>
+    <%= f.submit "确定", data:{ disable_with: "Submitting..."} %>
+  <% end %>
+</div>
