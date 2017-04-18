@@ -111,13 +111,18 @@
             <div class="review-input">
               <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
                 <%= f.input :content, label: "添加评论"%>
-                <%= f.submit "提交", :disable_with => "提交中",class: "btn btn-default"%>
+                <%= f.label "上传附图(支持多图)" %>
+                <%= f.file_field :avatar, multiple: true, name:"pictures[avatar][]", class:"btn review-file" %>
+                <div class="">
+                  <%= f.submit "提交", :disable_with => "提交中",class: "btn review-button" %>
+                </div>
+
               <% end %>
             </div>
 
             <table class="table table-striped table-bordered">
               <tbody>
-                <% @product.reviews.each do |review| %>
+                <% @product.reviews.order("created_at DESC").each do |review| %>
                   <tr>
                     <td>
                       <span>
@@ -139,6 +144,16 @@
                   <tr>
                     <td>
                       <%= simple_format(review.content) %>
+                      <% if review.pictures.present? %>
+                        <% review.pictures.each do |picture| %>
+                          <div class="review-picture">
+                            <a href="#<%= picture.id %>" data-toggle="collapse"><%= image_tag(picture.avatar.xsmall.url) %></a>
+                          </div>
+                          <div class="collapse" id= "<%= picture.id %>">
+                            <%= image_tag(picture.avatar.medium.url)%>
+                          </div>
+                        <% end %>
+                      <% end %>
                       <% if current_user.present? && review.user.email == current_user.email%>
                        <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
                       <% end %>

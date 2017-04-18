@@ -382,8 +382,23 @@
   }
 }
 .review-input{
-  margin-top:30px;
-  margin-bottom:20px;
+  margin:20px auto;
+  width:80%;
+  .review-file{
+    background-color:rgb(250,246,246);
+  }
+  .review-button{
+    background-color: rgb(93,64,55);
+    width:100px;
+    height:40px;
+    margin-left:40%;
+    color:white;
+  }
+}
+.review-picture{
+  display:inline-block;
+  margin-right:20px;
+
 }
 .review-faq-title{
   padding-top: 20px;

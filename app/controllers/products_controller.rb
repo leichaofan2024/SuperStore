@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
 
   def show
     @review = Review.new
+    @reivew = @review.pictures.build
     @photos = @product.photos.all
   end
 
