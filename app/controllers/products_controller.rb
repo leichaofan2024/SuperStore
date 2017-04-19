@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   before_action :validates_search_key, only:[:search]
   before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite, :pay_now]
   def index
-    @products = Product.all
     if params[:favorite] == "yes"
       @products = current_user.products
     end
@@ -11,11 +10,13 @@ class ProductsController < ApplicationController
       @products = Product.all.where(category_id: params[:category]).recent
     end
     if params[:order] == "latest"
-      @products = @products.recent
+      @products = Product.all.recent
     elsif params[:order] == "price"
-      @products = @products.order("price DESC")
+      @products = Product.all.order("price DESC")
     elsif params[:order] == "hot"
-      @products = @products.sort_by{|product|  product.users.count}.reverse
+      @products = Product.all.sort_by{|product|  product.users.count}.reverse
+    else
+      @products = Product.all.recent
     end
   end
 
