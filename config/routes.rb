@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
+  resources :cities do
+    member do
+      post :update_temp
+    end
+  end 
   root "welcome#index"
   get "about" => "welcome#about"
   namespace :admin do
