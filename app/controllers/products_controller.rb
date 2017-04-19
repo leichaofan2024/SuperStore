@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :validates_search_key, only:[:search]
   before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite, :pay_now]
   def index
-    @products = Product.all
+    @products = Product.all.recent
     if params[:favorite] == "yes"
       @products = current_user.products
     end
