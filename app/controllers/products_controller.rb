@@ -3,21 +3,22 @@ class ProductsController < ApplicationController
   before_action :validates_search_key, only:[:search]
   before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite, :pay_now]
   def index
+    @products = Product.all.recent
     if params[:favorite] == "yes"
       @products = current_user.products
     end
     if params[:category].present?
       @products = Product.all.where(category_id: params[:category]).recent
     end
-    if params[:order] == "latest"
-      @products = Product.all.recent
-    elsif params[:order] == "price"
-      @products = Product.all.order("price DESC")
-    elsif params[:order] == "hot"
-      @products = Product.all.sort_by{|product|  product.users.count}.reverse
-    else
-      @products = Product.all.recent
-    end
+
+    case params[:order]
+      when "latest"
+        @products = Product.all.recent
+      when "price"
+        @products = Product.all.order("price DESC")
+      when "hot"
+        @products = Product.all.sort_by{|product|  product.users.count}.reverse
+      end
   end
 
   def show
