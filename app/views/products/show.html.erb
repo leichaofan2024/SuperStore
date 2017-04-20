@@ -162,9 +162,9 @@
                       <% if review.pictures.present? %>
                         <% review.pictures.each do |picture| %>
                           <div class="review-picture">
-                            <a href="#<%= picture.id %>" data-toggle="collapse"><%= image_tag(picture.avatar.xsmall.url) %></a>
+                            <a href="#m<%= picture.id %>" data-toggle="collapse"><%= image_tag(picture.avatar.xsmall.url) %></a>
                           </div>
-                          <div class="collapse" id= "<%= picture.id %>">
+                          <div class="collapse" id= "m<%= picture.id %>">
                             <%= image_tag(picture.avatar.medium.url)%>
                           </div>
                         <% end %>
