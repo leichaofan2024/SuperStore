@@ -14,7 +14,15 @@
 
       <% if @photos.present? %>
        <div class="tab-content show-picture">
-         <% if @product.photos[0].present? %>
+         <% @photos.each_with_index do |p, index| %>
+           <% if index < 5 %>
+             <div class="tab-pane <%= render_active(index) %>" id="<%= index %>">
+
+               <%= image_tag p.avatar.medium.url %>
+             </div>
+           <% end %>
+         <% end %>
+         <!-- <% if @product.photos[0].present? %>
          <div class="tab-pane active" id="pic-1"><%= image_tag(@photos[0].avatar.medium.url) %></div>
          <% end %>
          <% if @product.photos[1].present? %>
@@ -28,10 +36,15 @@
          <% end %>
          <% if @product.photos[4].present? %>
          <div class="tab-pane" id="pic-5"><%= image_tag(@photos[4].avatar.medium.url) %></div>
-         <% end %>
+         <% end %> -->
        </div>
        <ul class="show-photo-xsmall-box nav nav-tabs">
-         <% if @product.photos[0].present? %>
+         <% @photos.each_with_index do |p, index| %>
+           <% if index < 5 %>
+             <li class=""><a href="#<%= index %>" data-toggle= "tab"><%= image_tag p.avatar.xsmall.url %></a></li>
+           <% end %>
+         <% end %>
+         <!-- <% if @product.photos[0].present? %>
          <li class="active"><a href="#pic-1" data-toggle="tab"><%= image_tag(@photos[0].avatar.xsmall.url) %></a></li>
          <% end %>
          <% if @product.photos[1].present? %>
@@ -45,7 +58,7 @@
          <% end %>
          <% if @product.photos[4].present? %>
          <li><a href="#pic-5" data-toggle="tab"><%= image_tag(@photos[4].avatar.xsmall.url)%></a></li>
-         <% end %>
+         <% end %> -->
        </ul>
       <% else %>
         <%= image_tag("http://placehold.it/400x400&text=No Pic", class:"thumbnail") %>
