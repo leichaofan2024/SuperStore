@@ -14,7 +14,15 @@
 
       <% if @photos.present? %>
        <div class="tab-content show-picture">
-         <% if @product.photos[0].present? %>
+         <% @photos.each_with_index do |p, index| %>
+           <% if index < 5 %>
+             <div class="tab-pane <%= render_active(index) %>" id="<%= index %>">
+
+               <%= image_tag p.avatar.medium.url %>
+             </div>
+           <% end %>
+         <% end %>
+         <!-- <% if @product.photos[0].present? %>
          <div class="tab-pane active" id="pic-1"><%= image_tag(@photos[0].avatar.medium.url) %></div>
          <% end %>
          <% if @product.photos[1].present? %>
@@ -28,10 +36,15 @@
          <% end %>
          <% if @product.photos[4].present? %>
          <div class="tab-pane" id="pic-5"><%= image_tag(@photos[4].avatar.medium.url) %></div>
-         <% end %>
+         <% end %> -->
        </div>
        <ul class="show-photo-xsmall-box nav nav-tabs">
-         <% if @product.photos[0].present? %>
+         <% @photos.each_with_index do |p, index| %>
+           <% if index < 5 %>
+             <li class=""><a href="#<%= index %>" data-toggle= "tab"><%= image_tag p.avatar.xsmall.url %></a></li>
+           <% end %>
+         <% end %>
+         <!-- <% if @product.photos[0].present? %>
          <li class="active"><a href="#pic-1" data-toggle="tab"><%= image_tag(@photos[0].avatar.xsmall.url) %></a></li>
          <% end %>
          <% if @product.photos[1].present? %>
@@ -45,7 +58,7 @@
          <% end %>
          <% if @product.photos[4].present? %>
          <li><a href="#pic-5" data-toggle="tab"><%= image_tag(@photos[4].avatar.xsmall.url)%></a></li>
-         <% end %>
+         <% end %> -->
        </ul>
       <% else %>
         <%= image_tag("http://placehold.it/400x400&text=No Pic", class:"thumbnail") %>
@@ -111,13 +124,18 @@
             <div class="review-input">
               <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
                 <%= f.input :content, label: "添加评论"%>
-                <%= f.submit "提交", :disable_with => "提交中",class: "btn btn-default"%>
+                <%= f.label "上传附图(支持多图)" %>
+                <%= f.file_field :avatar, multiple: true, name:"pictures[avatar][]", class:"btn review-file" %>
+                <div class="">
+                  <%= f.submit "提交", :disable_with => "提交中",class: "btn review-button" %>
+                </div>
+
               <% end %>
             </div>
 
             <table class="table table-striped table-bordered">
               <tbody>
-                <% @product.reviews.each do |review| %>
+                <% @product.reviews.order("created_at DESC").each do |review| %>
                   <tr>
                     <td>
                       <span>
@@ -133,12 +151,24 @@
                         <% else %>
                            <b>小红帽</b>
                         <% end %>
-                      </span> 说：
+                        说：
+                      </span>
+                      <span class="pull-right" style="margin-top:20px;"><%= review.created_at.to_s(:long) %></span>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <%= simple_format(review.content) %>
+                      <% if review.pictures.present? %>
+                        <% review.pictures.each do |picture| %>
+                          <div class="review-picture">
+                            <a href="#m<%= picture.id %>" data-toggle="collapse"><%= image_tag(picture.avatar.xsmall.url) %></a>
+                          </div>
+                          <div class="collapse" id= "m<%= picture.id %>">
+                            <%= image_tag(picture.avatar.medium.url)%>
+                          </div>
+                        <% end %>
+                      <% end %>
                       <% if current_user.present? && review.user.email == current_user.email%>
                        <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
                       <% end %>

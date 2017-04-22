@@ -241,13 +241,19 @@
 }
 .show-picture {
   margin-top:30px;
+  div:first-of-type{
+  }
 }
+
 .show-photo-xsmall-box{
   height:80px;
   width:400px;
-  // border:none;
-  // background: none;
+  li>a:first-of-type{
+
+  }
+
 }
+
 .show-photo-xsmall-box.nav-tabs {
   // border: none;
   margin-top: 15px; }
@@ -382,8 +388,23 @@
   }
 }
 .review-input{
-  margin-top:30px;
-  margin-bottom:20px;
+  margin:20px auto;
+  width:80%;
+  .review-file{
+    background-color:rgb(250,246,246);
+  }
+  .review-button{
+    background-color: rgb(240,240,240);
+    width:100px;
+    height:40px;
+    margin-left:40%;
+    box-shadow:4px 4px 4px rgba(189,189,189 ,1);
+  }
+}
+.review-picture{
+  display:inline-block;
+  margin-right:20px;
+
 }
 .review-faq-title{
   padding-top: 20px;
