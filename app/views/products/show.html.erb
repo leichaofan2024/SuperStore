@@ -234,8 +234,8 @@
             <div class="product-block">
               <div class="product-picture">
                 <%= link_to product_path(product) do %>
-                  <% if product.image.present? %>
-                    <%= image_tag(product.image.thumb.url)%>
+                  <% if product.photos.present? %>
+                    <%= image_tag(product.photos[0].avatar.thumb.url) %>
                   <% else %>
                     <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 200 , height: 200 ) %>
                   <% end %>
