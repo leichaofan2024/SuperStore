@@ -229,36 +229,12 @@
       <h3>为您推荐:</h3>
 
       <div class="product-area clearfix">
-        <% Product.limit(4).sort_by{|product| -product.users.count}.each do |product| %>
-          <div class="col-md-10 col-xs-10 product-list">
-            <div class="product-block">
-              <div class="product-picture">
-                <%= link_to product_path(product) do %>
-                  <% if product.photos.present? %>
-                    <%= image_tag(product.photos[0].avatar.thumb.url) %>
-                  <% else %>
-                    <%= image_tag("https://ww4.sinaimg.cn/large/006tNc79ly1fe2owhk361j307c05bmx4.jpg", width: 200 , height: 200 ) %>
-                  <% end %>
-                <% end %>
-              </div>
-
-              <div class="product-word">
-                <div class="product-word1">
-                  ¥ <%= product.price %>
-                  <% if !product.is_favorited?(current_user) %>
-                    <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart",style: "color:rgba(158,158,158 ,1)") %>
-                  <% else %>
-                    <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart", style: "color:rgb(93,64,55);") %>
-                  <% end %>
-                </div>
-              <div class="product-word2">
-                <div class="product-title"><%= product.title %></div>
-                <div class="product-favorite"><%= product.users.count%></div>
-              </div>
-
-              </div>
+        <% Product.all.sort_by{|product| product.users.count}.reverse.each_with_index do |product,index| %>
+          <% if index < 4 %>
+            <div class="col-md-12 col-xs-12 product-list">
+              <%= render :partial => "product_list", locals: {product: product, index: index} %>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
 

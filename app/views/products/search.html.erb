@@ -6,9 +6,21 @@
     <hr>
     <div class="">
       <h4>为您推荐：</h4>
-      <%= render partial: "product_list", :collection => Product.limit(4).sort_by{|product| -product.users.count}, :as => :product %>
+      <!-- <%= render partial: "product_list", :collection => Product.all.limit(4).sort_by{|product| product.users.count}.reverse, :as => :product %> -->
+      <% Product.all.includes(:photos).sort_by{|product| product.users.count}.reverse.each_with_index do |product,index| %>
+        <% if index < 4 %>
+          <div class="col-md-3 col-xs-6 product-list">
+            <%= render :partial => "product_list", locals: {product: product, index: index } %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   <% else %>
-    <%= render partial: "product_list", :collection => @products, :as => :product %>
+    <% @products.each do |product| %>
+      <div class="col-md-3 col-xs-6 product-list">
+        <%= render :partial => "product_list", locals: {product: product } %>
+      </div>
+    <% end %>
+    <!-- <%= render partial: "product_list", :collection => @products, :as => :product %> -->
   <% end %>
 </div>
