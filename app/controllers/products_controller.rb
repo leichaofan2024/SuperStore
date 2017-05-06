@@ -3,28 +3,28 @@ class ProductsController < ApplicationController
   before_action :validates_search_key, only:[:search]
   before_action :find_product, only:[:show, :add_to_cart, :add_to_favorite, :quit_favorite, :pay_now]
   def index
-    @products = Product.all.recent
+    @products = Product.includes(:photos).recent
     if params[:favorite] == "yes"
       @products = current_user.products
     end
     if params[:category].present?
-      @products = Product.all.where(category_id: params[:category]).recent
+      @products = Product.includes(:photos).where(category_id: params[:category]).recent
     end
 
     case params[:order]
       when "latest"
-        @products = Product.all.recent
+        @products = Product.includes(:photos).recent
       when "price"
-        @products = Product.all.order("price DESC")
+        @products = Product.includes(:photos).order("price DESC")
       when "hot"
-        @products = Product.all.sort_by{|product|  product.users.count}.reverse
+        @products = Product.includes(:photos).sort_by{|product|  product.users.count}.reverse
       end
   end
 
   def show
     @review = Review.new
     @reivew = @review.pictures.build
-    @photos = @product.photos.all 
+    @photos = @product.photos.all
   end
 
   def add_to_cart
@@ -48,6 +48,7 @@ class ProductsController < ApplicationController
   end
 
   def search
+
     @products = Product.ransack({:title_or_description_cont => @q}).result(distinct: true)
   end
   def pay_now

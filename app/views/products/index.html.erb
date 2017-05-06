@@ -15,7 +15,12 @@
 </div>
 
 <div class="product-area clearfix">
-  <%= render :partial => "product_list", :collection => @products, as: :product %>
+  <% @products.each do |product| %>
+    <div class="col-md-3 col-xs-6 product-list">
+      <%= render :partial => "product_list", locals:{ product: product } %>
+    </div>
+  <% end %>
+  <!-- <%= render :partial => "product_list", :collection => @products, as: :product %> -->
 </div>
 <p class="text-center product-ending">没有更多商品了</p>
 

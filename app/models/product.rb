@@ -26,6 +26,5 @@ class Product < ApplicationRecord
     self.users.delete(user)
     self.save
   end
-
   scope :recent, -> {order("created_at DESC")}
 end
