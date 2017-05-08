@@ -1,0 +1,4 @@
+
+$("#product-favorite-<%= @product.id %>").html("<%=j render :partial => "product_favorite", :locals => {:product => @product}%>");
+$("#product-favorite-count-<%=@product.id%>").html("<%= @product.users.count %>");
+$("#product-show-favorite<%=@product.id%>").html("收藏人气(<%=@product.users.count%>) <%=j render_product_favorite_state(@product)%>");

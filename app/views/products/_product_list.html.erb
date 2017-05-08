@@ -13,15 +13,13 @@
     <div class="product-word">
       <div class="product-word1">
         ¥ <%= product.price %>
-        <% if !product.is_favorited?(current_user) %>
-          <%= link_to("",add_to_favorite_product_path(product),method: :post, class: "fa fa-heart",style: "color:rgba(158,158,158 ,1)") %>
-        <% else %>
-          <%= link_to("", quit_favorite_product_path(product),method: :post,  class: "fa fa-heart", style: "color:rgb(93,64,55);") %>
-        <% end %>
+        <span id="product-favorite-<%= product.id %>">
+          <%= render :partial=> "product_favorite", :locals => {:product => product} %>
+        </span>
       </div>
     <div class="product-word2">
       <div class="product-title"><%= product.title %></div>
-      <div class="product-favorite"><%= product.users.count%></div>
+      <div class="product-favorite" id="product-favorite-count-<%=product.id%>"><%= product.users.count%></div>
     </div>
 
     </div>

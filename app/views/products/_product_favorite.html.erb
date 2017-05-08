@@ -1,0 +1,5 @@
+<% if product.is_favorited?(current_user) %>
+  <%= link_to("",quit_favorite_product_path(product),:remote =>true, method: :post, class: "fa fa-heart",style: "color:rgb(93,64,55);") %>
+<% else %>
+  <%= link_to("", add_to_favorite_product_path(product),:remote => true, method: :post,  class: "fa fa-heart", style: "color:rgba(158,158,158,1);") %>
+<% end %>
