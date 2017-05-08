@@ -118,7 +118,7 @@
        <div class="tab-content">
           <div class="tab-pane " id="tab_default_2">
             <div class="review-input">
-              <%= simple_form_for @review,url:product_reviews_path(@product) do |f| %>
+              <%= simple_form_for @review,url:product_reviews_path(@product),:remote=>true do |f| %>
                 <%= f.input :content, label: "添加评论"%>
                 <%= f.label "上传附图(支持多图)" %>
                 <%= f.file_field :avatar, multiple: true, name:"pictures[avatar][]", class:"btn review-file" %>
@@ -130,46 +130,9 @@
             </div>
 
             <table class="table table-striped table-bordered">
-              <tbody>
+              <tbody id="product-review">
                 <% @product.reviews.order("created_at DESC").each do |review| %>
-                  <tr>
-                    <td>
-                      <span>
-                        <% if review.user.image.present? %>
-                          <%= image_tag(review.user.image.xsmall.url,style:"border-radius:27px;")%>
-                       <% else %>
-                          <%= image_tag("https://ww1.sinaimg.cn/large/006tNc79ly1feg9gsctldj30rs0rswfs.jpg",width:50,height:50, style:"border-radius:27px;")%>
-                       <% end %>
-                      </span>
-                      <span>
-                        <% if review.user.nickname.present? %>
-                           <b><%= review.user.nickname %></b>
-                        <% else %>
-                           <b>小红帽</b>
-                        <% end %>
-                        说：
-                      </span>
-                      <span class="pull-right" style="margin-top:20px;"><%= review.created_at.to_s(:long) %></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <%= simple_format(review.content) %>
-                      <% if review.pictures.present? %>
-                        <% review.pictures.each do |picture| %>
-                          <div class="review-picture">
-                            <a href="#m<%= picture.id %>" data-toggle="collapse"><%= image_tag(picture.avatar.xsmall.url) %></a>
-                          </div>
-                          <div class="collapse" id= "m<%= picture.id %>">
-                            <%= image_tag(picture.avatar.medium.url)%>
-                          </div>
-                        <% end %>
-                      <% end %>
-                      <% if current_user.present? && review.user.email == current_user.email%>
-                       <%= link_to("撤销评论",product_review_path(@product,review), method: :delete, data:{confirm: "确定删除此评论吗？"}, class: "btn btn-warning", style: "float:right;")%>
-                      <% end %>
-                    </td>
-                  </tr>
+                  <%= render :partial => "review_list", :locals=> {:review => review}%>
                 <% end %>
               </tbody>
             </table>

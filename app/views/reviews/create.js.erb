@@ -1,0 +1,7 @@
+<% if @review.valid? %>
+  tsr="<%=j render :partial=> "products/review_list",:locals => {:review => @review}%>";
+  $("#product-review").prepend(tsr);
+  $("#review_content").val("");
+<% else %>
+  alert("评论不能为空！")
+<% end %>
