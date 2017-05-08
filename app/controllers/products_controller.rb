@@ -39,12 +39,11 @@ class ProductsController < ApplicationController
 
   def add_to_favorite
     @product.add_to_favorite!(current_user)
-    redirect_to :back, notice: "加入收藏!"
   end
 
   def quit_favorite
     @product.quit_favorite!(current_user)
-    redirect_to :back, notice: " 取消收藏！"
+    render "add_to_favorite"
   end
 
   def search
