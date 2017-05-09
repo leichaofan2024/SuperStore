@@ -78,7 +78,7 @@
 
       <div class="show-action clearfix">
         <% if @product.quantity.present? && @product.quantity > 0 %>
-          <%= link_to("加入购物车",add_to_cart_product_path(@product),method: :post, class: "btn btn-lg a1") %>
+          <%= link_to("加入购物车",add_to_cart_product_path(@product),:remote=>true,method: :post, class: "btn btn-lg a1") %>
           <%= link_to("立即购买", pay_now_product_path(@product), method: :post, class:"btn btn-lg a2", style: "background-color:none;") %>
           <div class="show-scan col-md-5">
             <a href="#scan" data-toggle="collapse">扫码支付</a>
