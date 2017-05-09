@@ -12,7 +12,8 @@ class ReviewsController < ApplicationController
           @picture = @review.pictures.create(:avatar => a)
         end
       end
-    end 
+    end
+    redirect_to :back
   end
 
   def destroy
