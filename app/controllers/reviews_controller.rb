@@ -13,7 +13,6 @@ class ReviewsController < ApplicationController
         end
       end
     end
-    redirect_to :back
   end
 
   def destroy
@@ -21,8 +20,6 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.pictures.destroy_all
     @review.destroy
-
-    redirect_to product_path(@product)
   end
 
   private

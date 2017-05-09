@@ -110,7 +110,7 @@
             <a data-toggle="tab" href="#tab_default_1" >宝贝详情</a>
           </li>
           <li>
-            <a data-toggle="tab" href="#tab_default_2">宝贝评价(<%= "#{@product.reviews.count}" %>)  </a>
+            <a data-toggle="tab" href="#tab_default_2" id="review-count">宝贝评价(<%= @product.reviews.count%>)  </a>
           </li>
 
         </ul>
@@ -118,21 +118,21 @@
        <div class="tab-content">
           <div class="tab-pane " id="tab_default_2">
             <div class="review-input">
-              <%= simple_form_for @review,url:product_reviews_path(@product),:remote=>true do |f| %>
+              <%= simple_form_for @review,url:product_reviews_path(@product),:remote => true do |f| %>
                 <%= f.input :content, label: "添加评论"%>
                 <%= f.label "上传附图(支持多图)" %>
                 <%= f.file_field :avatar, multiple: true, name:"pictures[avatar][]", class:"btn review-file" %>
                 <div class="">
                   <%= f.submit "提交", :disable_with => "提交中",class: "btn review-button" %>
-                </div>
+                </div>　　
 
               <% end %>
             </div>
 
             <table class="table table-striped table-bordered">
-              <tbody id="product-review">
+              <tbody id="product-review-<%=@product.id%>">
                 <% @product.reviews.order("created_at DESC").each do |review| %>
-                  <%= render :partial => "review_list", :locals=> {:review => review}%>
+                  <%= render :partial => "review_list", :locals=> {:product=> @product,:review => review}%>
                 <% end %>
               </tbody>
             </table>
