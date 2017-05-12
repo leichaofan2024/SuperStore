@@ -15,7 +15,6 @@ class CartitemsController < ApplicationController
     @cart = current_cart
     @cartitem = @cart.cartitems.find(params[:id])
     @cartitem.destroy
-    redirect_to carts_path, alert: "成功将#{@cartitem.title}从购物车中删除！"
   end
 
   def reduce_quantity
@@ -26,18 +25,17 @@ class CartitemsController < ApplicationController
       flash[:warning] = "亲，已经没的减啦！"
     end
     @cartitem.save
-    redirect_to carts_path
   end
 
   def add_quantity
     @cartitem = Cartitem.find(params[:id])
-    @cartitem.quantity += 1
-    if @cartitem.quantity < @cartitem.product.quantity + 1
+    if @cartitem.quantity < @cartitem.product.quantity
+     @cartitem.quantity += 1
       @cartitem.save
     else
       flash[:warning] = "库存不足，不能再加啦！"
-    end 
-    redirect_to carts_path
+    end
+    render "reduce_quantity"
   end
 
 

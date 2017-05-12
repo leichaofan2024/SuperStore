@@ -1,0 +1,5 @@
+
+$("#cartitem-quantity-<%= @cartitem.id%>").html("<%=j render :partial => "carts/cartitem_quantity",:locals=>{:cartitem =>@cartitem } %>");
+$("#application-flashes").html("<%=j render :partial => "common/flashes"%>");
+$("#cartitem-sum-<%=@cartitem.id%>").html("<%= @cartitem.quantity * @cartitem.product.price %>");
+$("#cart-sum-all").html("<%= render_cart_total_price(current_cart) %> RMB");
