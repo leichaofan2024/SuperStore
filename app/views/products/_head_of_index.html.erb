@@ -10,7 +10,7 @@
       <div class="cart">
         <%= link_to carts_path do %>
            <i class="fa fa-shopping-cart fa-lg"></i>购物车
-          <span><%= current_cart.cartitems.count %></span>
+          <span id="cart-count"><%= current_cart.cartitems.count %></span>
         <% end %>
       </div>
     </div>

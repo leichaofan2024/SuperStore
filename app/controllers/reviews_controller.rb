@@ -12,10 +12,6 @@ class ReviewsController < ApplicationController
           @picture = @review.pictures.create(:avatar => a)
         end
       end
-      redirect_to product_path(@product)
-    else
-      redirect_to product_path(@product)
-      flash[:warning] = "评论不能为空!"
     end
   end
 
@@ -24,8 +20,6 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.pictures.destroy_all
     @review.destroy
-
-    redirect_to product_path(@product)
   end
 
   private

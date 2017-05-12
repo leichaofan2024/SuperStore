@@ -24,7 +24,7 @@
 
   <% current_cart.cartitems.each do |cartitem| %>
 
-      <div class="cart-tbody">
+      <div class="cart-tbody" id="cart-tbody-<%= cartitem.id %>">
 
         <% if cartitem.product.present? %>
 
@@ -48,21 +48,23 @@
             <%= cartitem.product.price %>
           </div>
           <div class="cart-quantity">
-            <div class="countNumber">
-              <%= link_to("-", reduce_quantity_cartitem_path(cartitem), class: "countNumber-btn countNumber-btn-sub", method: :post, remote: true) %>
-              <input class="countNumber-input" type="integer" name="quantity" value="<%= cartitem.quantity %>">
-              <%= link_to("+", add_quantity_cartitem_path(cartitem), class: "countNumber-btn countNumber-btn-plus", method: :post, remote: true) %>
+            <div class="countNumber" >
+              <%= link_to("-", reduce_quantity_cartitem_path(cartitem), :remote=>true, class: "countNumber-btn countNumber-btn-sub", method: :post) %>
+              <span id="cartitem-quantity-<%= cartitem.id%>" >
+              <%= render :partial => "cartitem_quantity",:locals => {:cartitem => cartitem }%>
+              </span>
+              <%= link_to("+", add_quantity_cartitem_path(cartitem), :remote=>true, class: "countNumber-btn countNumber-btn-plus", method: :post) %>
             </div>
           </div>
-          <div class="cart-sum">
+          <div class="cart-sum" >
             <% if cartitem.product.price.present? %>
-              <%= cartitem.quantity * cartitem.product.price %> ¥
+              <span id="cartitem-sum-<%=cartitem.id%>"><%= cartitem.quantity * cartitem.product.price %> ¥</span>
             <% else %>
               0 ¥
             <% end %>
           </div>
           <div class="cart-remove">
-            <%= link_to("移除商品", cartitem_path(cartitem), method: :delete, data:{confirm: "Are you sure?"}, class: "btn") %>
+            <%= link_to("移除商品", cartitem_path(cartitem),:remote => true, method: :delete, data:{confirm: "确定要删除此商品吗?"}, class: "btn") %>
           </div>
 
         <% else %>
@@ -84,7 +86,7 @@
              此产品已过期
           </div>
           <div class="cart-remove">
-            <%= link_to("移除商品", cartitem_path(cartitem), method: :delete, data:{confirm: "Are you sure?"}, class: "btn") %>
+            <%= link_to("移除商品", cartitem_path(cartitem),:remote=> true, method: :delete, data:{confirm: "Are you sure?"}, class: "btn") %>
           </div>
 
         <% end %>
@@ -94,7 +96,7 @@
 
   <div class="cart-checkout">
     <%= link_to("确认结账", checkout_carts_path, method: :post, class: "btn btn-danger btn-lg pull-right" ) %>
-     <span><%= render_cart_total_price(current_cart) %> RMB</span>
+     <span id="cart-sum-all"><%= render_cart_total_price(current_cart) %> RMB</span>
      <b>总计:</b>
   </div>
 

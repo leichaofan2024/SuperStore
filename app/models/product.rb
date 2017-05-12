@@ -20,6 +20,7 @@ class Product < ApplicationRecord
   def add_to_favorite!(user)
     self.users << user
     self.save
+
   end
 
   def quit_favorite!(user)

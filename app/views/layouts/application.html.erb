@@ -14,7 +14,9 @@
     <div class=" layout-application clearfix">
 
       <%= render "common/navbar" %>
-      <%= render "common/flashes"%>
+      <div id="application-flashes">
+        <%= render "common/flashes"%>
+      </div>
       <%= yield %>
     </div>
 
